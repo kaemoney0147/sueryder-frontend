@@ -1,0 +1,25 @@
+.personcare-maincontainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 300px;
+}
+.personalcare-textarea {
+  width: 100%;
+}
+
+.view-personalcare {
+  display: flex;
+  justify-content: space-between;
+}
+.personalBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  gap: 100px;
+  cursor: pointer;
+}
+.previousBtn {
+  margin-top: 4px;
+}

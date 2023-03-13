@@ -1,0 +1,8 @@
+.patientDetails {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.patientDob {
+  margin-left: 50px;
+}

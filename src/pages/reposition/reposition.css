@@ -1,0 +1,27 @@
+.resposition-field {
+  display: flex;
+}
+.imgContainer {
+  flex: 1;
+}
+.rep-form-cont {
+  flex: 4;
+  margin-left: 20px;
+}
+.respForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.select {
+  height: 60px;
+}
+.rep-image {
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+}
+.respBtn {
+  display: flex;
+  gap: 142px;
+}

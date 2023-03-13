@@ -1,0 +1,87 @@
+.foodTitle {
+  text-align: center;
+}
+.foodchartListItem {
+  border: 3px solid black;
+}
+.foodchart-image {
+  width: 400px;
+  height: 335px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.patiendetails {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.left {
+  flex: 1;
+}
+.right {
+  flex: 2;
+  margin-left: 20px;
+}
+#fluidForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 40px;
+}
+.foodChartForm {
+  display: flex;
+  flex-wrap: wrap;
+}
+.right > h3 {
+  text-align: center;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  width: 340px;
+}
+.FormLabel {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgb(143, 132, 132);
+}
+.forminput {
+  height: 20px;
+  padding: 10px;
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+.foodchartBtn {
+  display: flex;
+  gap: 142px;
+}
+.submitAdmissionBtn {
+  margin-top: 10px;
+  width: 100px;
+  height: 50px;
+  border: none;
+  background-color: bisque;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.fluidTr {
+  background-color: brown;
+}
+.backbtn-fowarbtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  font-size: 1.3rem;
+  align-items: center;
+  cursor: pointer;
+}
+.previousBtn {
+  display: flex;
+  align-items: center;
+}

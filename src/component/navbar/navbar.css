@@ -1,0 +1,38 @@
+.Topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  position: sticky;
+  z-index: 999;
+}
+.navLogo {
+  width: 150px;
+}
+.topBarImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.topbarImageContainer {
+  margin-right: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+#dropwonLIST {
+  color: gray;
+  padding-top: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+.nav-text {
+  font-size: 15px;
+  color: gray;
+  font-weight: 600;
+}
+.nav-text:hover {
+  text-decoration: underline 3px solid gray;
+}
