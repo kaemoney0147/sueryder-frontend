@@ -13,27 +13,45 @@
 .patiendetails {
   font-weight: 600;
   font-size: 20px;
+  color: rgb(82, 102, 141);
 }
 
-.left {
+.fluidLeft {
   flex: 1;
+  margin-top: 50px;
 }
-.right {
-  flex: 2;
+.fluidRight {
+  flex: 4;
   margin-left: 20px;
+}
+.fluidLeft > .fluidChart-image {
+  width: 350px;
+  height: 300px;
+  margin-left: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0.318);
 }
 #fluidForm {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 40px;
+  margin-top: 70px;
 }
-.foodChartForm {
+.fluidChartForm {
   display: flex;
   flex-wrap: wrap;
+  background-color: #f7faff;
 }
-.right > h3 {
-  text-align: center;
+.fluidRight > h3 {
+  text-align: left;
+  font-size: 20px;
+  margin-top: 10px;
+  color: rgb(82, 102, 141);
+}
+.foodFormWrapper {
+  display: flex;
+  gap: 10px;
 }
 
 .form-group {
@@ -42,10 +60,10 @@
   width: 340px;
 }
 .FormLabel {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-size: 14px;
   font-weight: 600;
-  color: rgb(143, 132, 132);
+  color: rgba(0, 0, 0, 0.772);
 }
 .forminput {
   height: 20px;
@@ -69,8 +87,13 @@
   border-radius: 10px;
   cursor: pointer;
 }
-.fluidTr {
-  background-color: brown;
+.FluidchatCard {
+  font-size: 20px;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(10, 57, 71, 0.14);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(10, 57, 71, 0.14);
+  box-shadow: 10px 10px 5px 0px rgba(10, 57, 71, 0.14);
+  transform: scale(1);
+  background-color: #f7faff;
 }
 .backbtn-fowarbtn {
   display: flex;
@@ -84,4 +107,80 @@
 .previousBtn {
   display: flex;
   align-items: center;
+}
+.fluidTr {
+  border-bottom: 3px solid gray;
+}
+@media (max-width: 800px) {
+  .inputField {
+    width: 310px;
+  }
+  #fluidForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .fluidRight > h3 {
+    text-align: left;
+  }
+
+  #fluidForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  .foodFormWrapper {
+    display: flex;
+  }
+  .fluidLeft {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-right: 55px;
+  }
+  .ViewBtn {
+    margin-right: 50px;
+  }
+  .fluidLeft > img {
+    width: 400px;
+    height: 300px;
+  }
+  .fluidForm {
+    margin-top: 0px;
+  }
+}
+@media (max-width: 757px) {
+  #foodChartImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  #form {
+    display: block;
+    width: 100%;
+  }
+  .foodchartBtn {
+    display: flex;
+    gap: 10px;
+  }
+  .inputField {
+    width: 420px;
+  }
+  .foodFormWrapper {
+    display: block;
+  }
+
+  .formTitle {
+    text-align: start;
+    margin-bottom: 5px;
+  }
+  .fluidLeft > .fluidChart-image {
+    width: 200px;
+    height: 200px;
+  }
 }

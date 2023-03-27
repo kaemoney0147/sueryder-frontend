@@ -28,7 +28,7 @@ export default function PatientDetails() {
     fetchUserbyId();
   }, []);
   return (
-    <Container>
+    <Container className="detailsBody">
       <div className="fluid-container mb-3 p-3">
         <Link to={`/foodchart/${data._id}`}>
           <Button id="button">Food Chart</Button>
@@ -45,15 +45,17 @@ export default function PatientDetails() {
         <Link to={`/vital/${data._id}`}>
           <Button id="button">Vital Examination</Button>
         </Link>
-        <Button id="button">Accident</Button>
+        {/* <Button id="button">Accident</Button> */}
         <Link to={`/reposition/${data._id}`}>
           <Button id="button">Repositioning</Button>
         </Link>
         <Link to={`/personalcare/${data._id}`}>
           <Button id="button">Personal Care</Button>
         </Link>
-        <Button id="button">Temperature</Button>
-        <Button id="button">Obeservation</Button>
+        {/* <Button id="button">Temperature</Button> */}
+        <Link to={`/observation/${data._id}`}>
+          <Button id="button">Obeservation</Button>
+        </Link>
       </div>
 
       <div className="patient-history">
@@ -66,17 +68,19 @@ export default function PatientDetails() {
           <p className="patientInfo mb-0">Date of birth: {data.dob}</p>
           <p className="patientInfo mb-0">Gender: {data.Gender}</p>
           <p className="patientInfo">NHS NO: 1234567</p>
+          <p className="patientInfo">Allocated Ward: {data.ward}</p>
+          <p className="patientInfo">Room No: {data.room}</p>
         </div>
       </div>
       <div>
         <div className="discription mt-5">
-          <h3>Patient History</h3>
+          <h3 className="discriptionTitle">Patient History</h3>
           {data.discription}
         </div>
       </div>
       <div className="d-flex mt-3">
         <Link to={"/"}>
-          <Button id="primary">Back Home</Button>
+          <Button id="button">Back Home</Button>
         </Link>
       </div>
     </Container>

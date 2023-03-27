@@ -1,3 +1,15 @@
-body {
-  background-color: #009fff4d;
+:root {
+  --main-bg-color: #000000;
+  --secondary-bg-color: #fff1e3;
+  --font-color: #00513e;
+  --bright-color: #320047;
+  --less-bright-color: #040007;
+  overflow-x: hidden;
+
+  background: -moz-linear-gradient(
+    18deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgb(6, 0, 9, 1) 50%,
+    rgba(5, 0, 7, 1) 100%
+  );
 }

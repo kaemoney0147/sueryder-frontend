@@ -1,0 +1,58 @@
+/* .observation {
+  display: flex;
+  align-items: ;
+} */
+
+.title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+.ObsInfo {
+  display: flex;
+}
+.obsLeft {
+  flex: 1;
+  margin-top: 50px;
+}
+.obsRight {
+  flex: 3;
+  margin-left: 30px;
+}
+.obsPatientImage {
+  width: 300px;
+  /* margin-top: 80px; */
+  border-radius: 10px;
+}
+#obsTextarea {
+  height: 70px;
+}
+.obsRight > h3 {
+  text-align: left;
+  font-size: 20px;
+  margin-top: 10px;
+  color: rgb(82, 102, 141);
+}
+@media (max-width: 800px) {
+  .ObsInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .obsRight {
+    margin-left: 0;
+    width: 100%;
+  }
+  .obsLeft {
+    flex: 1;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  textarea.form-control {
+    height: 70px;
+  }
+}

@@ -4,6 +4,9 @@
 .imgContainer {
   flex: 1;
 }
+#respTextarea {
+  height: 70px;
+}
 .rep-form-cont {
   flex: 4;
   margin-left: 20px;
@@ -24,4 +27,24 @@
 .respBtn {
   display: flex;
   gap: 142px;
+}
+@media (max-width: 800px) {
+  .resposition-field {
+    display: flex;
+    flex-direction: column;
+  }
+  .respForm {
+    display: flex;
+  }
+  .rep-image {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 5px;
+  }
+}
+@media (max-width: 757px) {
+  .respBtn {
+    display: flex;
+    justify-content: space-between;
+  }
 }

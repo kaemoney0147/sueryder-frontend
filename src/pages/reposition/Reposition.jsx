@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Table } from "react-bootstrap";
+import { Button, Card, Container, Form, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import "../reposition/reposition.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -73,30 +73,39 @@ export default function Reposition() {
   }, []);
   return (
     <Container>
-      <div>
-        <div className="food-h1">
-          <h1 className="foodTitle">
-            Daily Repositioning & Skin inspection Chart
-          </h1>
-        </div>
-        <div className="food-note">
-          <ul className="foodchartListItem">
-            <li>Inspect the skin for evidence of change.</li>
-            <li>Re-assess as every positional change & document below.</li>
-            <li>
-              Use manual handling aids to mimimise the risk of friction and
-              shear.
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div className="personalBtn">
+      <Card className="FoodchatCard mt-4">
+        <Card.Header as="h5" className="text-center">
+          Daily Repositioning & Skin inspection Chart
+        </Card.Header>
+        <Card.Body>
+          <Card.Text>
+            <ul>
+              <li>
+                Complete this food chart each time you offer food to a patient
+              </li>
+              <li>
+                Please do not leave it until the end of the day or you may
+                forget what they have given.
+              </li>
+              <li>
+                specify the quantity of food eaten by filling the approriate
+                amount
+              </li>
+              <li>Even if no food is taken, whereable please hight reason.</li>
+            </ul>
+          </Card.Text>
+        </Card.Body>
+      </Card>
+
+      <div id="personalBtn">
         <span className="previousBtn">
           <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-          Back
+          Previous
         </span>
-        <span>
-          <AiOutlineArrowRight />
+        <span className="previousBtn">
+          <AiOutlineArrowRight
+            onClick={() => navigate(`/personalcare/${id}`)}
+          />
           Next
         </span>
       </div>
@@ -110,63 +119,73 @@ export default function Reposition() {
         </div>
         <div className="rep-form-cont">
           <Form className="respForm">
-            <Form.Group className="form-group">
-              <Form.Label className="FormLabel">Date</Form.Label>
-              <Form.Control
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-              />
-            </Form.Group>
+            <div className="foodFormWrapper">
+              <Form.Group className="form-group">
+                <Form.Label className="FormLabel">Date</Form.Label>
+                <Form.Control
+                  className="inputField"
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                />
+              </Form.Group>
 
-            <Form.Group className="form-group">
-              <Form.Label className="FormLabel">Time</Form.Label>
-              <Form.Control
-                type="time"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-              />
-            </Form.Group>
-            <Form.Group className="form-group">
-              <Form.Label className="FormLabel">Position</Form.Label>
-              <select
-                className="select"
-                value={position}
-                onChange={(e) => setPosition(e.target.value)}
-              >
-                <option>Select</option>
-                <option>Back</option>
-                <option>Left</option>
-                <option>Right</option>
-              </select>
-            </Form.Group>
-            <Form.Group className="form-group">
-              <Form.Label className="FormLabel">Comment</Form.Label>
-              <Form.Control
-                as="textarea"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-            </Form.Group>
+              <Form.Group className="form-group">
+                <Form.Label className="FormLabel">Time</Form.Label>
+                <Form.Control
+                  className="inputField"
+                  type="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                />
+              </Form.Group>
+            </div>
+            <div className="foodFormWrapper">
+              <Form.Group className="form-group">
+                <Form.Label className="FormLabel">Position</Form.Label>
+                <select
+                  className="select inputField"
+                  value={position}
+                  onChange={(e) => setPosition(e.target.value)}
+                >
+                  <option>Select</option>
+                  <option>Back</option>
+                  <option>Left</option>
+                  <option>Right</option>
+                </select>
+              </Form.Group>
+
+              <Form.Group className="form-group">
+                <Form.Label className="FormLabel">Comment</Form.Label>
+                <Form.Control
+                  id="respTextarea"
+                  className="inputField"
+                  as="textarea"
+                  value={comment}
+                  onChange={(e) => setComment(e.target.value)}
+                />
+              </Form.Group>
+            </div>
             <Form.Group className="form-group">
               <Form.Label className="FormLabel">Signature</Form.Label>
               <Form.Control
+                className="inputField"
                 type="text"
                 value={signatures}
                 onChange={(e) => setSignatures(e.target.value)}
               />
             </Form.Group>
           </Form>
-          <div className="respBtn">
+          <div className="respBtn mb-3">
             <Button
-              className="submitAdmissionBtn"
+              id="submitAdmissionBtn"
               type="submit"
               onClick={postRepostion}
             >
               Submit
             </Button>
-            <span>
-              <Button className="submitAdmissionBtn" onClick={handleClick}>
+            <span className="ViewBtn">
+              <Button id="submitAdmissionBtn" onClick={handleClick}>
                 View
               </Button>
             </span>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Table } from "react-bootstrap";
+import { Button, Card, Container, Form, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "../fluidchart/flidchart.css";
@@ -99,10 +99,8 @@ export default function FluidChart() {
   };
   return (
     <Container className="foodChart">
-      <div className="foodWrapper">
-        <h3 className="foodTitle">Fluid Balance Chart</h3>
-
-        <div className="foodListNote">
+      <div className="foodWrapper mb-3">
+        {/* <div className="foodListNote">
           <ul className="foodchartListItem">
             <li>
               Complete this fluid chart each time you offer patient any drink!
@@ -118,19 +116,46 @@ export default function FluidChart() {
               Even if no drink is taken, whereable please highlight reason.
             </li>
           </ul>
-        </div>
-        <div className="personalBtn">
+        </div> */}
+        <Card className="FluidchatCard mt-4">
+          <Card.Header as="h5" className="text-center">
+            <h3 className="foodTitle">Daily Fluid Chart</h3>
+          </Card.Header>
+          <Card.Body>
+            <Card.Text>
+              <ul>
+                <li>
+                  Complete this fluid chart each time you offer patient any
+                  drink!
+                </li>
+                <li>
+                  Please do not leave it until the end of the day or you may
+                  forget what they have given.
+                </li>
+                <li>
+                  specify the quantity of drink by filling the approriate amount
+                </li>
+                <li>
+                  Even if no drink is taken, whereable please highlight reason.
+                </li>
+              </ul>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <div id="personalBtn">
           <span className="previousBtn">
             <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-            Back
+            Previous
           </span>
-          <span>
+          <span className="previousBtn">
+            <AiOutlineArrowRight
+              onClick={() => navigate(`/bowelchart/${id}`)}
+            />
             Next
-            <AiOutlineArrowRight />
           </span>
         </div>
-        <div className="foodChartForm mt-5">
-          <div className="left">
+        <div className="fluidChartForm ">
+          <div className="fluidLeft">
             <div className="patiendetails">
               Name: {patient.title} {patient.firstName} {patient.lastName}
               <p>Ward: {patient.ward}</p>
@@ -138,132 +163,151 @@ export default function FluidChart() {
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHeV0O5PFEropKwvdSrOl9zLaR84_O919oVA&usqp=CAU"
               alt="patient"
-              className="foodchart-image mb-2"
+              className="fluidChart-image mb-2"
             />
           </div>
-          <div className="right">
+          <div className="fluidRight">
             <h3>Record Fluid Intake</h3>
             <Form id="fluidForm">
-              <Form.Group controlId="formGridState">
-                <Form.Label className="FormLabel mb-0">Period: </Form.Label>
-                <select
-                  value={timeofday}
-                  onChange={(e) => setTimeofday(e.target.value)}
-                  required
-                >
-                  <option>Select</option>
-                  <option>Breakfast</option>
-                  <option>Lunch</option>
-                  <option>Dinner</option>
-                  <option>TeaTime</option>
-                  <option>MidMorning</option>
-                  <option>Midnight</option>
-                </select>
-              </Form.Group>
-              <Form.Group controlId="formGridState">
-                <Form.Label className="FormLabel mb-0">Route </Form.Label>
-                <select
-                  className="form-option"
-                  value={route}
-                  onChange={(e) => setRoute(e.target.value)}
-                  required
-                >
-                  <option>Select</option>
-                  <option>Peg</option>
-                  <option>Oral</option>
-                </select>
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Date</Form.Label>
-                <Form.Control
-                  type="date"
-                  value={date}
-                  placeholder="DD/MM/YY"
-                  onChange={(e) => setDate(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Time</Form.Label>
-                <Form.Control
-                  type="time"
-                  placeholder="Time"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">
-                  What fluid did you offer?
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Please input fluid here"
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Amount</Form.Label>
-                <Form.Control
-                  placeholder="Amount offered"
-                  value={amountofferd}
-                  onChange={(e) => setAmountofferd(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Accept</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Amount accepted"
-                  value={amounttaken}
-                  onChange={(e) => setAmounttaken(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Total</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Total Running"
-                  value={running}
-                  onChange={(e) => setRunning(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Output</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Output in ml"
-                  value={output}
-                  onChange={(e) => setOutput(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Carers Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Carers Name"
-                  value={givenby}
-                  onChange={(e) => setGivenby(e.target.value)}
-                  required
-                />
-              </Form.Group>
+              <div className="foodFormWrapper">
+                <Form.Group controlId="formGridState">
+                  <Form.Label className="FormLabel ">Period: </Form.Label>
+                  <select
+                    className="inputField"
+                    value={timeofday}
+                    onChange={(e) => setTimeofday(e.target.value)}
+                    required
+                  >
+                    <option>Select</option>
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                    <option>TeaTime</option>
+                    <option>MidMorning</option>
+                    <option>Midnight</option>
+                  </select>
+                </Form.Group>
+                <Form.Group controlId="formGridState">
+                  <Form.Label className="FormLabel ">Route </Form.Label>
+                  <select
+                    className="inputField"
+                    value={route}
+                    onChange={(e) => setRoute(e.target.value)}
+                    required
+                  >
+                    <option>Select</option>
+                    <option>Peg</option>
+                    <option>Oral</option>
+                  </select>
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Date</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="date"
+                    value={date}
+                    placeholder="DD/MM/YY"
+                    onChange={(e) => setDate(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Time</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="time"
+                    placeholder="Time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">
+                    What fluid did you offer?
+                  </Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Please input fluid here"
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Amount</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    placeholder="Amount offered"
+                    value={amountofferd}
+                    onChange={(e) => setAmountofferd(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel">Accept</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Amount accepted"
+                    value={amounttaken}
+                    onChange={(e) => setAmounttaken(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel">Total</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Total Running"
+                    value={running}
+                    onChange={(e) => setRunning(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Output</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Output in ml"
+                    value={output}
+                    onChange={(e) => setOutput(e.target.value)}
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Carers Name</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Carers Name"
+                    value={givenby}
+                    onChange={(e) => setGivenby(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
             </Form>
-            <div className="foodchartBtn">
+            <div className="foodchartBtn mb-3">
               <Button
-                className="submitAdmissionBtn"
+                id="submitAdmissionBtn"
                 type="submit"
                 onClick={handleSubmitFluid}
               >
                 Submit
               </Button>
-              <span>
+              <span className="ViewBtn">
                 <Button
-                  className="submitAdmissionBtn"
+                  id="submitAdmissionBtn"
                   type="submit"
                   onClick={handleClick}
                 >
@@ -291,13 +335,13 @@ export default function FluidChart() {
             <tbody>
               {fluid.reverse().map((c) => (
                 <tr key={c._id}>
-                  <td>{c.date}</td>
-                  <td> {c.time}</td>
-                  <td>{c.type}</td>
-                  <td>{c.amountofferd}</td>
-                  <td>{c.amounttaken}</td>
-                  <td>{c.running}</td>
-                  <td>{c.givenby}</td>
+                  <td className="td">{c.date}</td>
+                  <td className="td"> {c.time}</td>
+                  <td className="td">{c.type}</td>
+                  <td className="td">{c.amountofferd}</td>
+                  <td className="td">{c.amounttaken}</td>
+                  <td className="td">{c.running}</td>
+                  <td className="td">{c.givenby}</td>
                 </tr>
               ))}
             </tbody>

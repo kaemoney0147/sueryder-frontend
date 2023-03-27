@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Container, Form, Table } from "react-bootstrap";
+import { Button, Card, Container, Form, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "../vitalexamination/vitalexamination.css";
@@ -87,35 +87,45 @@ export default function VitalExamination() {
   };
   return (
     <Container className="foodChart">
-      <div className="foodWrapper">
-        <h3 className="foodTitle"> Recording Patient Vital Examination</h3>
-        <div className="foodListNote">
-          <ul className="foodchartListItem">
-            <li>
-              Complete this food chart each time you offer food to a patient
-            </li>
-            <li>
-              Please do not leave it until the end of the day or you may forget
-              what they have given.
-            </li>
-            <li>
-              specify the quantity of food eaten by filling the approriate
-              amount
-            </li>
-            <li>Even if no food is taken, whereable please hight reason.</li>
-          </ul>
-        </div>
-        <div className="personalBtn">
+      <div className="foodWrapper mt-3 mb-3">
+        <Card className="FoodchatCard">
+          <Card.Header as="h5" className="text-center">
+            <h3 className="foodTitle"> Recording Patient Vital Examination</h3>
+          </Card.Header>
+          <Card.Body>
+            <Card.Text>
+              <ul>
+                <li>
+                  Complete this food chart each time you offer food to a patient
+                </li>
+                <li>
+                  Please do not leave it until the end of the day or you may
+                  forget what they have given.
+                </li>
+                <li>
+                  specify the quantity of food eaten by filling the approriate
+                  amount
+                </li>
+                <li>
+                  Even if no food is taken, whereable please hight reason.
+                </li>
+              </ul>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+        <div id="personalBtn">
           <span className="previousBtn">
             <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-            Back
+            Previous
           </span>
-          <span>
-            <AiOutlineArrowRight />
+          <span className="previousBtn">
+            <AiOutlineArrowRight
+              onClick={() => navigate(`/reposition/${id}`)}
+            />
             Next
           </span>
         </div>
-        <div className="foodChartForm mt-5">
+        <div className="foodChartForm">
           <div className="left">
             <div className="patiendetails">
               Name: {patient.title} {patient.firstName} {patient.lastName}
@@ -128,118 +138,136 @@ export default function VitalExamination() {
             />
           </div>
           <div className="right">
+            <h3>Record Examination</h3>
             <Form id="form" onSubmit={handleSubmit}>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Date</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="date"
+                    value={date}
+                    placeholder="DD/MM/YY"
+                    onChange={(e) => setDate(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Time</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="time"
+                    placeholder="Respiration"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Resp</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Respiration"
+                    value={respiration}
+                    onChange={(e) => setRespiration(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Blood Pressure</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Blood pressure"
+                    value={bloodpressure}
+                    onChange={(e) => setBloodpressure(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel">01Sats</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Oxygen Saturation %"
+                    value={scale1}
+                    onChange={(e) => setScale1(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel">02Sats</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Use Scale 2 if urgent"
+                    value={scale2}
+                    onChange={(e) => setScale2(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group controlId="formGridState">
+                  <Form.Label className="FormLabel">ACVPU </Form.Label>
+                  <select
+                    className="inputField"
+                    value={consciousness}
+                    onChange={(e) => setConsciousness(e.target.value)}
+                    required
+                  >
+                    <option>Default</option>
+                    <option>Alert</option>
+                    <option>Confusion</option>
+                  </select>
+                </Form.Group>
+                <Form.Group controlId="formGridState">
+                  <Form.Label className="FormLabel">Inspired O2</Form.Label>
+                  <select
+                    className="inputField"
+                    value={breathing}
+                    onChange={(e) => setBreathing(e.target.value)}
+                    required
+                  >
+                    <option>Default</option>
+                    <option>Air</option>
+                    <option>Oxygen</option>
+                  </select>
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel">Pulse</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Pulse"
+                    value={pulse}
+                    onChange={(e) => setPulse(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel">Temp</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Temprature"
+                    value={temparature}
+                    onChange={(e) => setTemparature(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
               <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Date</Form.Label>
+                <Form.Label className="FormLabel">Carers Name</Form.Label>
                 <Form.Control
-                  type="date"
-                  value={date}
-                  placeholder="DD/MM/YY"
-                  onChange={(e) => setDate(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Time</Form.Label>
-                <Form.Control
-                  type="time"
-                  placeholder="Respiration"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Resp</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Respiration"
-                  value={respiration}
-                  onChange={(e) => setRespiration(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">
-                  Blood Pressure
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Blood pressure"
-                  value={bloodpressure}
-                  onChange={(e) => setBloodpressure(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">01Sats</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Oxygen Saturation %"
-                  value={scale1}
-                  onChange={(e) => setScale1(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">02Sats</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Use Scale 2 if urgent"
-                  value={scale2}
-                  onChange={(e) => setScale2(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group controlId="formGridState">
-                <Form.Label className="FormLabel mb-0">ACVPU </Form.Label>
-                <select
-                  className="form-option"
-                  value={consciousness}
-                  onChange={(e) => setConsciousness(e.target.value)}
-                  required
-                >
-                  <option>Default</option>
-                  <option>Alert</option>
-                  <option>Confusion</option>
-                </select>
-              </Form.Group>
-              <Form.Group controlId="formGridState">
-                <Form.Label className="FormLabel mb-0">Inspired O2</Form.Label>
-                <select
-                  className="form-option"
-                  value={breathing}
-                  onChange={(e) => setBreathing(e.target.value)}
-                  required
-                >
-                  <option>Default</option>
-                  <option>Air</option>
-                  <option>Oxygen</option>
-                </select>
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Pulse</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Pulse"
-                  value={pulse}
-                  onChange={(e) => setPulse(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Temp</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Temprature"
-                  value={temparature}
-                  onChange={(e) => setTemparature(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Carers Name</Form.Label>
-                <Form.Control
+                  className="inputField"
                   type="text"
                   placeholder="Carers Name"
                   value={signature}
@@ -248,17 +276,17 @@ export default function VitalExamination() {
                 />
               </Form.Group>
             </Form>
-            <div className="foodchartBtn">
+            <div className="foodchartBtn mb-3">
               <Button
-                className="submitAdmissionBtn"
+                id="submitAdmissionBtn"
                 type="submit"
                 onClick={handleSubmit}
               >
                 Submit
               </Button>
-              <span>
+              <span className="ViewBtn">
                 <Button
-                  className="submitAdmissionBtn"
+                  id="submitAdmissionBtn"
                   type="submit"
                   onClick={handleClick}
                 >
@@ -276,15 +304,15 @@ export default function VitalExamination() {
               <tr className="tr-bowel">
                 <th>Date</th>
                 <th>Time</th>
-                <th>BloodPresure</th>
-                <th>Inspired O2</th>
-                <th>Consciousness</th>
+                <th>BP</th>
+                <th>O2</th>
+                <th>ACVPU</th>
                 <th>Pulse</th>
-                <th>Respiration</th>
-                <th>Temparature</th>
+                <th>Resp</th>
+                <th>Temp</th>
                 <th>scale1</th>
                 <th>scale2</th>
-                <th>Signature</th>
+                <th>Carers</th>
               </tr>
             </thead>
             <tbody>

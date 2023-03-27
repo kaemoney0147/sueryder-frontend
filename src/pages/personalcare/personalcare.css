@@ -1,16 +1,27 @@
 .personcare-maincontainer {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 300px;
 }
-.personalcare-textarea {
-  width: 100%;
-}
+#personalCareForm {
+  display: flex;
+  flex-wrap: wrap;
 
+  /* flex-direction: column; */
+}
+#personcareFormWrapper {
+  display: flex;
+}
 .view-personalcare {
   display: flex;
   justify-content: space-between;
+}
+.personalcareInputfield {
+  width: 300px;
+}
+.personlCareTextarea {
+  width: 100%;
+}
+textarea.form-control {
+  height: 400px;
 }
 .personalBtn {
   display: flex;
@@ -22,4 +33,33 @@
 }
 .previousBtn {
   margin-top: 4px;
+}
+.personcareInfo {
+  font-size: 15px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+.personcareInfo > h1 {
+  font-size: 30px;
+  color: coral;
+}
+@media (max-width: 800px) {
+  .personlCareTextarea {
+    width: 670px;
+  }
+  .personalcareInputfield {
+    width: 330px;
+  }
+  #personalCareForm {
+    display: flex;
+    /* flex-direction: column; */
+  }
+}
+@media (max-width: 757px) {
+  .personlCareTextarea {
+    width: 460px;
+  }
+  .personalcareInputfield {
+    width: 460px;
+  }
 }

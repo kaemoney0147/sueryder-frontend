@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Button, Container, Form, Table } from "react-bootstrap";
+import { Button, Card, Container, Form, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "../foodchart/foodchart.css";
 import { MdArrowForward } from "react-icons/md";
 import { BiArrowBack } from "react-icons/bi";
@@ -18,6 +19,24 @@ export default function FoodChart() {
   const [showContent, setShowContent] = useState(false);
   const [food, setFoood] = useState([]);
   const navigate = useNavigate();
+  const [sliceIndex, setSliceIndex] = useState(0);
+  const sliceSize = 5;
+
+  const nextSlice = () => {
+    const nextIndex = sliceIndex + sliceSize;
+    if (nextIndex >= food.length) {
+      return;
+    }
+    setSliceIndex(nextIndex);
+  };
+
+  const prevSlice = () => {
+    const prevIndex = sliceIndex - sliceSize;
+    if (prevIndex < 0) {
+      return;
+    }
+    setSliceIndex(prevIndex);
+  };
 
   const handleClick = () => {
     setShowContent(!showContent);
@@ -86,36 +105,46 @@ export default function FoodChart() {
     } catch (error) {}
   };
   return (
-    <Container className="foodChart">
+    <Container className="foodChart mt-5 ">
       <div className="foodWrapper">
-        <h3 className="foodTitle"> 24hrFOOD Intake CHART</h3>
-        <div className="foodListNote">
-          <ul className="foodchartListItem">
-            <li>
-              Complete this food chart each time you offer food to a patient
-            </li>
-            <li>
-              Please do not leave it until the end of the day or you may forget
-              what they have given.
-            </li>
-            <li>
-              specify the quantity of food eaten by filling the approriate
-              amount
-            </li>
-            <li>Even if no food is taken, whereable please hight reason.</li>
-          </ul>
-        </div>
-        <div className="backbtn-fowarbtn">
+        <Card className="FoodchatCard">
+          <Card.Header as="h5" className="text-center">
+            24hours Food Intake Chart
+          </Card.Header>
+          <Card.Body>
+            <div>
+              <ul>
+                <li>
+                  Complete this food chart each time you offer food to a patient
+                </li>
+                <li>
+                  Please do not leave it until the end of the day or you may
+                  forget what they have given.
+                </li>
+                <li>
+                  specify the quantity of food eaten by filling the approriate
+                  amount
+                </li>
+                <li>
+                  Even if no food is taken, whereable please hight reason.
+                </li>
+              </ul>
+            </div>
+          </Card.Body>
+        </Card>
+        <div id="personalBtn">
           <span className="previousBtn">
-            <BiArrowBack onClick={() => navigate(-1)} />
+            <AiOutlineArrowLeft onClick={() => navigate(-1)} />
             Previous
           </span>
-          <span>
-            next
-            <MdArrowForward />
+          <span className="previousBtn">
+            <AiOutlineArrowRight
+              onClick={() => navigate(`/fluidchart/${id}`)}
+            />
+            Next
           </span>
         </div>
-        <div className="foodChartForm mt-5">
+        <div className="foodChartForm mb-4">
           <div className="left">
             <div className="patiendetails mb-2">
               Name: {patient.title} {patient.firstName} {patient.lastName}
@@ -124,96 +153,110 @@ export default function FoodChart() {
             <img
               src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHeuFqIfKH9g5j4X6H3HXtpjSa8G8XidNqOA&usqp=CAU"
               alt="patient"
-              className="foodchart-image"
+              className="foodchart-image mb-3"
             />
           </div>
           <div className="right">
+            <h3>Record Intake</h3>
             <Form id="form" onSubmit={handleSubmit}>
-              <Form.Group controlId="formGridState">
-                <Form.Label className="FormLabel mb-0">Period: </Form.Label>
-                <select
-                  value={timeofday}
-                  onChange={(e) => setTimeofday(e.target.value)}
-                  required
-                >
-                  <option>Breakfast</option>
-                  <option>Lunch</option>
-                  <option>Dinner</option>
-                </select>
-              </Form.Group>
+              <div className="foodFormWrapper">
+                <Form.Group controlId="formGridState">
+                  <Form.Label className="FormLabel ">Period: </Form.Label>
+                  <select
+                    className="inputField "
+                    value={timeofday}
+                    onChange={(e) => setTimeofday(e.target.value)}
+                    required
+                  >
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                  </select>
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Date</Form.Label>
+                  <Form.Control
+                    className="inputField "
+                    type="date"
+                    value={date}
+                    placeholder="DD/MM/YY"
+                    onChange={(e) => setDate(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Time</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="time"
+                    placeholder="Time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">
+                    What did you offer?
+                  </Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Type of Food"
+                    value={offered}
+                    onChange={(e) => setOffered(e.target.value)}
+                  />
+                </Form.Group>
+              </div>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">offer</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Amount Offered?"
+                    value={amountoffered}
+                    onChange={(e) => setAmountoffered(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel ">Accept</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Amount Accepted?"
+                    value={amountaccepted}
+                    onChange={(e) => setAmountaccepted(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
               <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Date</Form.Label>
+                <Form.Label className="FormLabel ">Signature</Form.Label>
                 <Form.Control
-                  type="date"
-                  value={date}
-                  placeholder="DD/MM/YY"
-                  onChange={(e) => setDate(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Time</Form.Label>
-                <Form.Control
-                  type="time"
-                  placeholder="Time"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">
-                  What did you offer?
-                </Form.Label>
-                <Form.Control
+                  className="inputField"
                   type="text"
-                  placeholder="Type of Food"
-                  value={offered}
-                  onChange={(e) => setOffered(e.target.value)}
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">offer</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Amount Offered?"
-                  value={amountoffered}
-                  onChange={(e) => setAmountoffered(e.target.value)}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel mb-0">Accept</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Amount Accepted?"
-                  value={amountaccepted}
-                  onChange={(e) => setAmountaccepted(e.target.value)}
+                  placeholder="Carers Name"
+                  value={givenby}
+                  onChange={(e) => setGivenby(e.target.value)}
                   required
                 />
               </Form.Group>
             </Form>
-            <Form.Group className="form-group mb-0">
-              <Form.Label className="FormLabel mb-0">Carers Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Carers Name"
-                value={givenby}
-                onChange={(e) => setGivenby(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <div className="foodchartBtn">
+            <div className="foodchartBtn mb-4">
               <Button
-                className="submitAdmissionBtn"
+                id="submitAdmissionBtn"
                 type="submit"
                 onClick={handleSubmit}
               >
                 Submit
               </Button>
-              <span>
+              <span className="ViewBtn">
                 <Button
-                  className="submitAdmissionBtn"
+                  id="submitAdmissionBtn"
                   type="submit"
                   onClick={handleClick}
                 >
@@ -238,18 +281,31 @@ export default function FoodChart() {
               </tr>
             </thead>
             <tbody>
-              {food.reverse().map((c) => (
-                <tr key={c._id}>
-                  <td>{c.date}</td>
-                  <td> {c.time}</td>
-                  <td>{c.offered}</td>
-                  <td>{c.amountoffered}</td>
-                  <td>{c.amountaccepted}</td>
-                  <td>{c.givenby}</td>
-                </tr>
-              ))}
+              {food
+                .map((c) => (
+                  <tr key={c._id}>
+                    <td className="td">{c.date}</td>
+                    <td className="td"> {c.time}</td>
+                    <td className="td">{c.offered}</td>
+                    <td className="td">{c.amountoffered}</td>
+                    <td className="td">{c.amountaccepted}</td>
+                    <td className="td">{c.givenby}</td>
+                  </tr>
+                ))
+                .reverse()
+                .slice(sliceIndex, sliceIndex + sliceSize)}
             </tbody>
           </Table>
+          <div className="tabelBtn">
+            <span className="previousBtn">
+              <BiArrowBack onClick={prevSlice} />
+              Prev
+            </span>
+            <span className="previousBtn">
+              Next
+              <MdArrowForward onClick={nextSlice} />
+            </span>
+          </div>
         </div>
       )}
     </Container>

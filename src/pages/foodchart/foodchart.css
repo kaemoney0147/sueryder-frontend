@@ -1,32 +1,40 @@
-.foodTitle {
-  text-align: center;
-}
+/* #foodChart {
+  margin-left: 5px;
+  margin-right: 5px;
+} */
 .foodchartListItem {
   border: 3px solid black;
 }
-.foodchart-image {
-  width: 400px;
-  border-radius: 10px;
-  cursor: pointer;
-}
+
 .patiendetails {
   font-weight: 600;
   font-size: 20px;
+  margin-left: 10px;
 }
 
 .left {
   flex: 1;
+  margin-top: 50px;
+}
+.left > .foodchart-image {
+  width: 350px;
+  margin-left: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0.318);
 }
 .right {
-  flex: 2;
+  flex: 4;
   margin-left: 20px;
 }
 #form {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  width: 100%;
+  /* gap: 10px; */
 }
 .foodChartForm {
+  background-color: #f7faff;
   display: flex;
   flex-wrap: wrap;
 }
@@ -40,43 +48,174 @@
   margin-bottom: 10px;
   font-size: 14px;
   font-weight: 600;
-  color: rgb(143, 132, 132);
+  /* color: rgb(143, 132, 132); */
 }
-.forminput {
-  height: 20px;
-  padding: 10px;
-  border: 1px solid gray;
-  border-radius: 5px;
-}
-.foodchartBtn {
-  display: flex;
-  gap: 142px;
-}
-.submitAdmissionBtn {
-  margin-top: 10px;
-  width: 100px;
-  height: 50px;
-  border: none;
-  background-color: bisque;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 600;
-  border-radius: 10px;
+
+#submitAdmissionBtn {
   cursor: pointer;
+  margin: 2px;
+  width: 100px;
+  margin-top: 10px;
+  border-color: gray;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 17px;
+  line-height: 1.17648;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  font-family: SF Pro Text, SF Pro Icons, Helvetica Neue, Helvetica, Arial,
+    sans-serif;
+  min-width: 28px;
+  padding: 8px 16px;
+  border-radius: 980px;
+  background: #e8e8ed;
+  color: #000;
+  --sk-button-margin-horizontal: 14px;
+  --sk-button-margin-vertical: 14px;
+}
+#foodChartRecord {
+  font-size: 20px;
+  /* margin-top: 70px; */
+  margin-top: 10px;
+}
+.foorChartTable {
+  /* -webkit-box-shadow: -11px 3px 35px -10px rgba(0, 0, 0, 0.62);
+  -moz-box-shadow: -11px 3px 35px -10px rgba(0, 0, 0, 0.62);
+  box-shadow: -11px 3px 35px -10px rgba(0, 0, 0, 0.62); */
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(178, 183, 184, 1);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(178, 183, 184, 1);
+  box-shadow: 2px 3px 5px 0px rgba(178, 183, 184, 1);
+  background-color: rgba(240, 248, 255, 0.561);
+  border: 3px solid gray;
+  transform: scale(1.05);
+  /* background-color: #bdcad7; */
 }
 .tr-food {
-  background-color: green;
+  border-bottom: 3px solid gray;
 }
-.backbtn-fowarbtn {
+.td {
+  border-bottom: 3px solid gray;
+}
+
+#personalBtn {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 50px;
-  font-size: 1.3rem;
-  align-items: center;
-  cursor: pointer;
+  justify-content: space-between;
 }
 .previousBtn {
+  font-size: 1rem;
+  cursor: pointer;
+}
+.foodSelect {
+  height: 40px;
+  border-radius: 5px;
+}
+.tabelBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+.formWrapper {
   display: flex;
   align-items: center;
+  gap: 5px;
+}
+.right > h3 {
+  text-align: left;
+  font-size: 20px;
+  margin-top: 10px;
+  color: rgb(82, 102, 141);
+}
+.FoodchatCard {
+  border: none;
+  /* background-color: #f5f5f7; */
+  /* background: rgba(242, 246, 248, 1); */
+  background-color: #f7faff;
+  color: #08193e;
+  font-size: 20px;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(10, 57, 71, 0.14);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(10, 57, 71, 0.14);
+  box-shadow: 10px 10px 5px 0px rgba(10, 57, 71, 0.14);
+  transform: scale(1);
+}
+.text-center {
+  border-bottom: none;
+  background: none;
+  color: #f79852;
+}
+.formTitle {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+@media (max-width: 800px) {
+  .inputField {
+    width: 310px;
+  }
+  #form {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    /* gap: 5px; */
+  }
+  .formTitle {
+    font-size: 25px;
+    /* color: gray; */
+  }
+  .foodFormWrapper {
+    display: flex;
+  }
+  .left {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-right: 50px;
+  }
+  .ViewBtn {
+    margin-right: 50px;
+  }
+  .left > img {
+    width: 400px;
+    height: 300px;
+  }
+  .foodChartForm {
+    margin-top: 0px;
+  }
+}
+@media (max-width: 757px) {
+  #foodChartImg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+  #form {
+    display: block;
+    width: 100%;
+  }
+  .foodchartBtn {
+    display: flex;
+    gap: 10px;
+  }
+  .inputField {
+    width: 420px;
+  }
+  .foodFormWrapper {
+    display: block;
+  }
+
+  .formTitle {
+    text-align: start;
+    margin-bottom: 5px;
+  }
+  .left > .foodchart-image {
+    width: 200px;
+    height: 200px;
+  }
 }

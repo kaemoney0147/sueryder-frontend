@@ -1,5 +1,63 @@
-.bowelChart-image {
-  width: 400px;
-  height: 400px;
-  border-radius: 20px;
+.bowelLeft {
+  flex: 1;
+  margin-top: 50px;
+}
+.bowelPatiendetails {
+  font-weight: 600;
+  font-size: 20px;
+  color: rgb(82, 102, 141);
+}
+.bowelChartForm {
+  display: flex;
+  background-color: #f7faff;
+  gap: 20px;
+}
+
+.bowelLeft > .bowelChart-image {
+  width: 350px;
+  height: 250px;
+  margin-left: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: 2px solid rgba(0, 0, 0, 0.318);
+}
+.bowelRight > h3 {
+  text-align: left;
+  font-size: 20px;
+  margin-top: 10px;
+  color: rgb(82, 102, 141);
+}
+@media (max-width: 800px) {
+  .bowelChartForm {
+    display: flex;
+    flex-direction: column;
+  }
+  #form {
+    margin-top: 5px;
+    width: 100%;
+  }
+  .bowelChart-image {
+    margin-right: auto;
+  }
+  .bowelRight {
+    margin-left: 10px;
+  }
+  .bowelLeft {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+  .bowelPatiendetails {
+    margin-right: 100px;
+  }
+}
+@media (max-width: 757px) {
+  .left > .bowelChart-image {
+    width: 200px;
+    height: 150px;
+  }
+  .bowelPatiendetails {
+    margin-left: 2px;
+  }
 }

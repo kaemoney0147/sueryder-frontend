@@ -13,6 +13,7 @@ import Reposition from "./pages/reposition/Reposition";
 import BodyMap from "./pages/bodymap/BodyMap";
 import Login from "./component/login/Login";
 import { useSelector } from "react-redux";
+import Observation from "./pages/observation/Observation";
 
 function App() {
   const userData = useSelector((state) => state.list.userInfo);
@@ -31,6 +32,7 @@ function App() {
         <Route path="/vital/:id" element={<VitalExamination />} />
         <Route path="/reposition/:id" element={<Reposition />} />
         <Route path="/bodymap/:id" element={<BodyMap />} />
+        <Route path="/observation/:id" element={<Observation />} />
       </Routes>
     </BrowserRouter>
   );

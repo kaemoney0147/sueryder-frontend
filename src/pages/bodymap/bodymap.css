@@ -1,8 +1,24 @@
-.patientDetails {
+/* .patientDetails {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
-}
+} */
 .patientDob {
   margin-left: 50px;
+}
+#bodyMapTextarea {
+  height: 70px;
+}
+@media (max-width: 800px) {
+  .resposition-field {
+    display: flex;
+    flex-direction: column;
+  }
+  .respForm {
+    display: flex;
+  }
+  .foodchartBtn {
+    display: flex;
+    justify-content: space-between;
+  }
 }

@@ -1,9 +1,12 @@
 .Topbar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   top: 0;
+  box-sizing: border-box;
+  background-color: #f7fafe;
   position: sticky;
+  height: 80px;
   z-index: 999;
 }
 .navLogo {
@@ -23,16 +26,30 @@
   align-items: center;
 }
 #dropwonLIST {
-  color: gray;
+  color: rgba(17, 21, 23, 0.455);
   padding-top: 0;
   font-size: 15px;
   font-weight: 600;
+  margin-left: 10px;
 }
 .nav-text {
-  font-size: 15px;
-  color: gray;
+  font-size: 16px;
   font-weight: 600;
 }
 .nav-text:hover {
-  text-decoration: underline 3px solid gray;
+  text-decoration: underline 1px solid dimgrey;
+}
+
+@media (max-width: 757px) {
+  /* #navbarScrollingDropdown,
+  .nav-text {
+    display: none;
+  } */
+  .topbarImageContainer {
+    display: flex;
+  }
+  #dropwonLIST {
+    margin-left: 0;
+    padding: 5px;
+  }
 }

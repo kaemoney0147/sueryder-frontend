@@ -6,10 +6,11 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const DELETE_ACCESS_TOKEN = "DELETE_ACCESS_TOKEN";
 export const LIST_OF_QUERY = "LIST_OF_QUERY";
 
+const url = process.env.REACT_APP_BE_URL;
 export const getAllPatient = () => {
   return async (dispatch, getstate) => {
     try {
-      let url = await fetch("http://localhost:3001/patient");
+      let url = await fetch(`${url}/patient`);
 
       if (url.ok) {
         const response = await url.json();
@@ -26,7 +27,7 @@ export const getAllPatient = () => {
 export const fetchWithQuery = (query) => {
   return async (dispatch, getstate) => {
     try {
-      let url = await fetch(`http://localhost:3001/patient?ward=${query}`);
+      let url = await fetch(`${url}/patient?ward=${query}&firstName=${query}`);
       if (url.ok) {
         const response = await url.json();
         const queryData = response;
@@ -41,7 +42,7 @@ export const fetchWithQuery = (query) => {
   };
 };
 
-const baseEndpoint = "http://localhost:3001";
+const baseEndpoint = process.env.process.env.REACT_APP_BE_URL;
 export const getAccessToken = (userLogin) => {
   return async (dispatch) => {
     const options = {
@@ -109,6 +110,10 @@ export const logoutUser = () => {
       });
       dispatch({
         type: List_OF_PATIENT,
+        payload: [],
+      });
+      dispatch({
+        type: LIST_OF_QUERY,
         payload: [],
       });
       dispatch({

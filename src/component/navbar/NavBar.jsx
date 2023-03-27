@@ -9,36 +9,49 @@ import {
   NavDropdown,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/index.js";
-import { fetchWithQuery } from "../../redux/actions/index.js";
 
 import "./navbar.css";
-// import { fetchMyData } from "../../redux/actions/index.js";
 
 export default function NavBar() {
-  const [query, setQuery] = useState("");
   const profile = useSelector((state) => state.list.userInfo);
-
   const dispatch = useDispatch();
-
-  const handleChange = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    dispatch(fetchWithQuery(query));
-    setQuery("");
-  };
-
   const navigate = useNavigate();
+
+  useEffect(() => {
+    let timeoutId;
+
+    function startTimer() {
+      timeoutId = setTimeout(() => {
+        logOut();
+      }, 30 * 60 * 1000); // 30 minutes in milliseconds
+    }
+
+    function resetTimer() {
+      clearTimeout(timeoutId);
+      startTimer();
+    }
+
+    function handleUserAction() {
+      resetTimer();
+    }
+
+    startTimer();
+
+    window.addEventListener("mousemove", handleUserAction);
+    window.addEventListener("keydown", handleUserAction);
+
+    return () => {
+      window.removeEventListener("mousemove", handleUserAction);
+      window.removeEventListener("keydown", handleUserAction);
+    };
+  }, []);
 
   const logOut = () => {
     dispatch(logoutUser());
     persistor.purge();
     navigate("/");
-    window.location.reload();
   };
 
   return (
@@ -57,9 +70,9 @@ export default function NavBar() {
             <Nav.Link href="/" className="nav-text">
               Home
             </Nav.Link>
-            <Nav.Link href="#action2" className="nav-text">
+            {/* <Nav.Link href="#action2" className="nav-text">
               All
-            </Nav.Link>
+            </Nav.Link> */}
             <NavDropdown
               title="General Task"
               id="navbarScrollingDropdown"
@@ -69,23 +82,10 @@ export default function NavBar() {
               <NavDropdown.Item href="#action4">Wheelchair</NavDropdown.Item>
             </NavDropdown>
           </Nav>
-          <Form className="d-flex" onSubmit={handleSubmit}>
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-              onChange={handleChange}
-            />
-          </Form>
         </Navbar.Collapse>
       </Container>
-      <div className="topbarImageContainer">
-        <img
-          src="https://images.unsplash.com/photo-1578496781379-7dcfb995293d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTV8fHBhdGllbnR8ZW58MHx8MHx8&auto=format&fit=crop&w=800&q=60"
-          alt=""
-          className="topBarImage"
-        />
+      <div className="topbarImageContainer mb">
+        <img src={profile.avatar} alt="" className="topBarImage" />
         <NavDropdown title={profile.username} id="dropwonLIST">
           <NavDropdown.Item onClick={logOut}>Logout</NavDropdown.Item>
         </NavDropdown>
