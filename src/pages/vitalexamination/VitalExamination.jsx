@@ -40,7 +40,7 @@ export default function VitalExamination() {
   const id = params.id;
   const fetchUserbyId = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/patient/${id}`);
+      const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/${id}`);
       if (url.ok) {
         const response = await url.json();
         console.log(response);
@@ -52,7 +52,9 @@ export default function VitalExamination() {
   };
   const fetchFood = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/vital/patient/${id}`);
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/vital/patient/${id}`
+      );
       if (url.ok) {
         const response = await url.json();
         console.log(response);
@@ -77,7 +79,10 @@ export default function VitalExamination() {
           "Content-Type": "application/json",
         },
       };
-      const url = await fetch(`http://localhost:3001/vital/${id}`, options);
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/vital/${id}`,
+        options
+      );
       if (url.ok) {
         alert("You have successfully save a bowel for the patient");
       } else {

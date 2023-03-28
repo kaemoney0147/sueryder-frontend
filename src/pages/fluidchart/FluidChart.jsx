@@ -50,7 +50,7 @@ export default function FluidChart() {
   const id = params.id;
   const fetchUserbyId = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/patient/${id}`);
+      const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/${id}`);
       if (url.ok) {
         const response = await url.json();
         console.log(response);
@@ -62,7 +62,9 @@ export default function FluidChart() {
   };
   const fetchFluid = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/fluid/patient/${id}`);
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/fluid/patient/${id}`
+      );
       if (url.ok) {
         const response = await url.json();
         console.log(response);
@@ -89,7 +91,10 @@ export default function FluidChart() {
           "Content-Type": "application/json",
         },
       };
-      const url = await fetch(`http://localhost:3001/fluid/${id}`, options);
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/fluid/${id}`,
+        options
+      );
       if (url.ok) {
         alert("You have successfully save a fluid for this patient");
       } else {

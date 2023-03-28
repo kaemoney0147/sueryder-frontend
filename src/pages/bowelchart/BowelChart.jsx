@@ -52,7 +52,9 @@ export default function BowelChart() {
   };
   const fetchFood = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/bowel/patient/${id}`);
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/bowel/patient/${id}`
+      );
       if (url.ok) {
         const response = await url.json();
         console.log(response);
@@ -84,7 +86,10 @@ export default function BowelChart() {
           "Content-Type": "application/json",
         },
       };
-      const url = await fetch(`http://localhost:3001/bowel/${id}`, options);
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/bowel/${id}`,
+        options
+      );
       if (url.ok) {
         alert("You have successfully save a bowel for the patient");
       } else {

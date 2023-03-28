@@ -13,7 +13,7 @@ export default function PatientDetails() {
 
   const fetchUserbyId = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/patient/${id}`);
+      const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/${id}`);
       if (url.ok) {
         const response = await url.json();
         console.log(response);

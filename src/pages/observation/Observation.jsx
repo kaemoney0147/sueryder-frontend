@@ -12,7 +12,9 @@ export default function Observation() {
   const userId = params.id;
   const fetchUserbyId = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/patient/${userId}`);
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/patient/${userId}`
+      );
       if (url.ok) {
         const response = await url.json();
         console.log(response);

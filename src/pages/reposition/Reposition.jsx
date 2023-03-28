@@ -38,7 +38,7 @@ export default function Reposition() {
         },
       };
       const url = await fetch(
-        `http://localhost:3001/resposition/${id}/resp`,
+        `${process.env.REACT_APP_BE_URL}/resposition/${id}/resp`,
         options
       );
       if (url.ok) {
@@ -57,7 +57,7 @@ export default function Reposition() {
   const fetchReposition = async () => {
     try {
       const url = await fetch(
-        `http://localhost:3001/resposition/patient/${id}`
+        `${process.env.REACT_APP_BE_URL}/resposition/patient/${id}`
       );
       if (url.ok) {
         const response = await url.json();

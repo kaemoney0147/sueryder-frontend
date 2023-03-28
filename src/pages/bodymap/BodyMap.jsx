@@ -40,7 +40,7 @@ export default function BodyMap() {
         },
       };
       let response = await fetch(
-        `http://localhost:3001/bodymap/${userId}`,
+        `${process.env.REACT_APP_BE_URL}/bodymap/${userId}`,
         options
       );
       if (response.ok) {
@@ -54,7 +54,7 @@ export default function BodyMap() {
       }
       try {
         const url = await fetch(
-          `http://localhost:3001/bodymap/patient/${userId}`
+          `${process.env.REACT_APP_BE_URL}/bodymap/patient/${userId}`
         );
         if (url.ok) {
           const fetchedBodyMap = await url.json();

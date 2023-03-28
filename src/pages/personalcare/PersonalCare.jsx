@@ -59,7 +59,7 @@ export default function PersonalCare() {
   const fetchCare = async () => {
     try {
       const url = await fetch(
-        `http://localhost:3001/personalcare/patient/${userId}`
+        `${process.env.REACT_APP_BE_URL}/personalcare/patient/${userId}`
       );
       if (url.ok) {
         const response = await url.json();
@@ -86,7 +86,7 @@ export default function PersonalCare() {
         },
       };
       const url = await fetch(
-        `http://localhost:3001/personalcare/${userId}`,
+        `${process.env.REACT_APP_BE_URL}/personalcare/${userId}`,
         options
       );
       if (url.ok) {
@@ -106,7 +106,9 @@ export default function PersonalCare() {
   };
   const fetchUserbyId = async () => {
     try {
-      const url = await fetch(`http://localhost:3001/patient/${userId}`);
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/patient/${userId}`
+      );
       if (url.ok) {
         const response = await url.json();
         console.log(response);
