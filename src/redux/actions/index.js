@@ -42,7 +42,7 @@ export const fetchWithQuery = (query) => {
   };
 };
 
-const baseEndpoint = process.env.process.env.REACT_APP_BE_URL;
+const baseEndpoint = process.env.REACT_APP_BE_URL;
 export const getAccessToken = (userLogin) => {
   return async (dispatch) => {
     const options = {
