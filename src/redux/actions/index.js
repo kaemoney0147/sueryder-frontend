@@ -6,11 +6,11 @@ export const LOGOUT_USER = "LOGOUT_USER";
 export const DELETE_ACCESS_TOKEN = "DELETE_ACCESS_TOKEN";
 export const LIST_OF_QUERY = "LIST_OF_QUERY";
 
-const url = process.env.REACT_APP_BE_URL;
+const apiUrl = process.env.REACT_APP_BE_URL;
 export const getAllPatient = () => {
   return async (dispatch, getstate) => {
     try {
-      let url = await fetch(`${url}/patient`);
+      let url = await fetch(`${apiUrl}/patient`);
 
       if (url.ok) {
         const response = await url.json();
@@ -27,7 +27,9 @@ export const getAllPatient = () => {
 export const fetchWithQuery = (query) => {
   return async (dispatch, getstate) => {
     try {
-      let url = await fetch(`${url}/patient?ward=${query}&firstName=${query}`);
+      let url = await fetch(
+        `${apiUrl}/patient?ward=${query}&firstName=${query}`
+      );
       if (url.ok) {
         const response = await url.json();
         const queryData = response;
