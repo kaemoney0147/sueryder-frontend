@@ -27,9 +27,9 @@ export default function AllPatient() {
   const [newPatientDays, setNewPatientDays] = useState(7);
 
   function getDaysDiff(date1, date2) {
-    const oneDay = 24 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
-    const diffDays = Math.round(Math.abs((date1 - date2) / oneDay));
-    return diffDays;
+    const oneDay = 12 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
+    const newPatientDays = Math.round(Math.abs((date1 - date2) / oneDay));
+    return newPatientDays;
   }
 
   const [query, setQuery] = useState("");
@@ -131,7 +131,7 @@ export default function AllPatient() {
             .map((p, index) => (
               <Col className="allPatientCol col-4 mb-3" key={index}>
                 <Card id="patientlistCard">
-                  {getDaysDiff(new Date(p.createdAt), new Date()) <=
+                  {setNewPatientDays(new Date(p.createdAt), new Date()) <=
                     newPatientDays && (
                     <Badge variant="danger" className="new-patient-badge">
                       New Admission
