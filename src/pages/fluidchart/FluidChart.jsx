@@ -18,7 +18,24 @@ export default function FluidChart() {
   const [running, setRunning] = useState("");
   const [output, setOutput] = useState("");
   const [route, setRoute] = useState("");
+  const [sliceIndex, setSliceIndex] = useState(0);
+  const sliceSize = 5;
 
+  const nextSlice = () => {
+    const nextIndex = sliceIndex + sliceSize;
+    if (nextIndex >= fluid.length) {
+      return;
+    }
+    setSliceIndex(nextIndex);
+  };
+
+  const prevSlice = () => {
+    const prevIndex = sliceIndex - sliceSize;
+    if (prevIndex < 0) {
+      return;
+    }
+    setSliceIndex(prevIndex);
+  };
   const [showContent, setShowContent] = useState(false);
   let sum = 0;
   const totalaccept = (total) => {
@@ -53,12 +70,13 @@ export default function FluidChart() {
       const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/${id}`);
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setPatient(response);
       } else {
         console.log("error fetching user");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   const fetchFluid = async () => {
     try {
@@ -67,15 +85,14 @@ export default function FluidChart() {
       );
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setFluid(response);
-        console.log(fluid);
         const total = totalaccept(response);
-        console.log("total", total);
       } else {
         console.log("error fetching user");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     fetchFluid();
@@ -97,37 +114,32 @@ export default function FluidChart() {
       );
       if (url.ok) {
         alert("You have successfully save a fluid for this patient");
+        setAmountofferd("");
+        setAmounttaken("");
+        setDate("");
+        setGivenby("");
+        setRunning("");
+        setOutput("");
+        setTimeofday("");
+        setRoute("");
+        setType("");
+        setTime("");
       } else {
         console.log("something went wrong");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Container className="foodChart">
       <div className="foodWrapper mb-3">
-        {/* <div className="foodListNote">
-          <ul className="foodchartListItem">
-            <li>
-              Complete this fluid chart each time you offer patient any drink!
-            </li>
-            <li>
-              Please do not leave it until the end of the day or you may forget
-              what they have given.
-            </li>
-            <li>
-              specify the quantity of drink by filling the approriate amount
-            </li>
-            <li>
-              Even if no drink is taken, whereable please highlight reason.
-            </li>
-          </ul>
-        </div> */}
         <Card className="FluidchatCard mt-4">
-          <Card.Header as="h5" className="text-center">
+          <Card.Header className="text-center">
             <h3 className="foodTitle">Daily Fluid Chart</h3>
           </Card.Header>
           <Card.Body>
-            <Card.Text>
+            <div>
               <ul>
                 <li>
                   Complete this fluid chart each time you offer patient any
@@ -144,7 +156,7 @@ export default function FluidChart() {
                   Even if no drink is taken, whereable please highlight reason.
                 </li>
               </ul>
-            </Card.Text>
+            </div>
           </Card.Body>
         </Card>
         <div id="personalBtn">
@@ -325,32 +337,57 @@ export default function FluidChart() {
       </div>
       {showContent && (
         <div>
-          <Table className="foorChartTable mt-2">
+          <table className="blueTable mb-3">
             <thead>
-              <tr className="fluidTr">
+              <tr>
                 <th>Date</th>
                 <th>Time</th>
+                <th>Type</th>
+                <th>Route</th>
                 <th>Offered</th>
-                <th>Amount</th>
-                <th>Accept</th>
+                <th>Accepted</th>
                 <th>Total</th>
+                <th>Output</th>
                 <th>Givenby</th>
               </tr>
             </thead>
+            <tfoot>
+              <tr>
+                <td colSpan="9">
+                  <div className="links">
+                    <a onClick={prevSlice} className="tableBtn">
+                      &laquo;
+                    </a>{" "}
+                    <a className="active" href="#">
+                      1
+                    </a>{" "}
+                    <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>{" "}
+                    <a onClick={nextSlice} className="tableBtn">
+                      &raquo;
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
             <tbody>
-              {fluid.reverse().map((c) => (
-                <tr key={c._id}>
-                  <td className="td">{c.date}</td>
-                  <td className="td"> {c.time}</td>
-                  <td className="td">{c.type}</td>
-                  <td className="td">{c.amountofferd}</td>
-                  <td className="td">{c.amounttaken}</td>
-                  <td className="td">{c.running}</td>
-                  <td className="td">{c.givenby}</td>
-                </tr>
-              ))}
+              {fluid
+                .map((c) => (
+                  <tr key={c._id}>
+                    <td>{c.date}</td>
+                    <td>{c.time}</td>
+                    <td>{c.type}</td>
+                    <td>{c.route}</td>
+                    <td>{c.amountofferd}</td>
+                    <td>{c.amounttaken}</td>
+                    <td>{c.running}</td>
+                    <td>{c.output}</td>
+                    <td>{c.givenby}</td>
+                  </tr>
+                ))
+                .reverse()
+                .slice(sliceIndex, sliceIndex + sliceSize)}
             </tbody>
-          </Table>
+          </table>
         </div>
       )}
     </Container>

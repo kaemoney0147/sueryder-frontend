@@ -1,8 +1,3 @@
-/* .observation {
-  display: flex;
-  align-items: ;
-} */
-
 .title {
   text-align: center;
   font-size: 30px;
@@ -10,6 +5,8 @@
 }
 .ObsInfo {
   display: flex;
+  background-color: #f7faff;
+  border-radius: 10px;
 }
 .obsLeft {
   flex: 1;
@@ -19,13 +16,20 @@
   flex: 3;
   margin-left: 30px;
 }
+#personalCareForm {
+  margin-left: 10px;
+}
 .obsPatientImage {
   width: 300px;
   /* margin-top: 80px; */
   border-radius: 10px;
 }
-#obsTextarea {
+/* #obsTextarea {
   height: 70px;
+  width: 500px;
+} */
+.personlCareTextarea {
+  width: 980px;
 }
 .obsRight > h3 {
   text-align: left;
@@ -38,7 +42,9 @@
     display: flex;
     flex-direction: column;
   }
-
+  .obsLeft > .obsPatientImage {
+    margin-left: 10px;
+  }
   .obsRight {
     margin-left: 0;
     width: 100%;
@@ -52,7 +58,27 @@
     gap: 10px;
     width: 100%;
   }
+  .obsForm {
+    margin-left: 10px;
+  }
+  .obsRight > h3 {
+    margin-left: 10px;
+  }
   textarea.form-control {
     height: 70px;
+  }
+}
+
+@media (max-width: 800px) {
+  #personalCareForm {
+    margin-left: 10px;
+  }
+  .personcareInfo {
+    margin-left: 10px;
+  }
+  .obsPatientImage {
+    width: 250px;
+    height: 200px;
+    object-fit: cover;
   }
 }

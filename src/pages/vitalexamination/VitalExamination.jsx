@@ -21,6 +21,24 @@ export default function VitalExamination() {
   const [showContent, setShowContent] = useState(false);
   const [vital, setVital] = useState([]);
   const navigate = useNavigate();
+  const [sliceIndex, setSliceIndex] = useState(0);
+  const sliceSize = 5;
+
+  const nextSlice = () => {
+    const nextIndex = sliceIndex + sliceSize;
+    if (nextIndex >= vital.length) {
+      return;
+    }
+    setSliceIndex(nextIndex);
+  };
+
+  const prevSlice = () => {
+    const prevIndex = sliceIndex - sliceSize;
+    if (prevIndex < 0) {
+      return;
+    }
+    setSliceIndex(prevIndex);
+  };
   const inputData = {
     date: date,
     time: time,
@@ -43,12 +61,13 @@ export default function VitalExamination() {
       const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/${id}`);
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setPatient(response);
       } else {
         console.log("error fetching user");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   const fetchFood = async () => {
     try {
@@ -57,12 +76,14 @@ export default function VitalExamination() {
       );
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
+
         setVital(response);
       } else {
         console.log("error fetching user");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     fetchUserbyId();
@@ -84,21 +105,23 @@ export default function VitalExamination() {
         options
       );
       if (url.ok) {
-        alert("You have successfully save a bowel for the patient");
+        alert("You have successfully submit patient vital information");
       } else {
         console.log("something went wrong");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Container className="foodChart">
       <div className="foodWrapper mt-3 mb-3">
         <Card className="FoodchatCard">
-          <Card.Header as="h5" className="text-center">
+          <Card.Header className="text-center">
             <h3 className="foodTitle"> Recording Patient Vital Examination</h3>
           </Card.Header>
           <Card.Body>
-            <Card.Text>
+            <div>
               <ul>
                 <li>
                   Complete this food chart each time you offer food to a patient
@@ -115,7 +138,7 @@ export default function VitalExamination() {
                   Even if no food is taken, whereable please hight reason.
                 </li>
               </ul>
-            </Card.Text>
+            </div>
           </Card.Body>
         </Card>
         <div id="personalBtn">
@@ -303,10 +326,10 @@ export default function VitalExamination() {
         </div>
       </div>
       {showContent && (
-        <div className="table-div">
-          <Table className="table mt-2">
+        <div>
+          <table className="blueTable mb-3">
             <thead>
-              <tr className="tr-bowel">
+              <tr>
                 <th>Date</th>
                 <th>Time</th>
                 <th>BP</th>
@@ -317,27 +340,48 @@ export default function VitalExamination() {
                 <th>Temp</th>
                 <th>scale1</th>
                 <th>scale2</th>
-                <th>Carers</th>
+                <th>Signature</th>
               </tr>
             </thead>
+            <tfoot>
+              <tr>
+                <td colSpan="12">
+                  <div className="links">
+                    <a onClick={prevSlice} className="tableBtn">
+                      &laquo;
+                    </a>{" "}
+                    <a className="active" href="#">
+                      1
+                    </a>{" "}
+                    <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>{" "}
+                    <a onClick={nextSlice} className="tableBtn">
+                      &raquo;
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
             <tbody>
-              {vital.reverse().map((c) => (
-                <tr key={c._id}>
-                  <td>{c.date}</td>
-                  <td> {c.time}</td>
-                  <td>{c.bloodpressure} mmHg</td>
-                  <td>{c.breathing}</td>
-                  <td>{c.consciousness}</td>
-                  <td>{c.pulse}/min</td>
-                  <td>{c.respiration} /min</td>
-                  <td>{c.temparature}°C</td>
-                  <td>{c.scale1}%</td>
-                  <td>{c.scale2}%</td>
-                  <td>{c.signature}</td>
-                </tr>
-              ))}
+              {vital
+                .map((c) => (
+                  <tr key={c._id}>
+                    <td>{c.date}</td>
+                    <td> {c.time}</td>
+                    <td>{c.bloodpressure} mmHg</td>
+                    <td>{c.breathing}</td>
+                    <td>{c.consciousness}</td>
+                    <td>{c.pulse}/min</td>
+                    <td>{c.respiration} /min</td>
+                    <td>{c.temparature}°C</td>
+                    <td>{c.scale1}%</td>
+                    <td>{c.scale2}%</td>
+                    <td>{c.signature}</td>
+                  </tr>
+                ))
+                .reverse()
+                .slice(sliceIndex, sliceIndex + sliceSize)}
             </tbody>
-          </Table>
+          </table>
         </div>
       )}
     </Container>

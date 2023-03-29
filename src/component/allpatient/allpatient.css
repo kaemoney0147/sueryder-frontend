@@ -84,8 +84,8 @@
   border-color: transparent;
   border: none;
   outline: none;
-  margin-left: 245px;
-  margin-bottom: 100px;
+  margin-left: 240px;
+  /* margin-bottom: 100px; */
 }
 .dropdown-toggle::after {
   display: none;
@@ -116,7 +116,7 @@
   margin-top: 20px;
   padding-inline: 70px;
 }
-@media (max-width: 800px) {
+@media (min-width: 768px) and (max-width: 1042px) {
   .searchIcon {
     margin-left: 550px;
   }
@@ -133,13 +133,14 @@
     margin-left: 33px;
   }
 }
-@media (max-width: 757px) {
+@media (min-device-width: 400px) and (max-width: 768px) {
   #patientDiplaysCard {
-    display: block;
-    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
   }
   #patientlistCard {
-    width: 400px;
+    width: 300px;
   }
   .patient-image {
     width: 100%;
@@ -151,10 +152,18 @@
     margin-left: 340px;
   }
   .searchInput {
-    width: 300px;
+    width: 250px;
     border-radius: 20px;
+  }
+  .searchDiv {
     display: flex;
-    margin-right: auto;
-    margin-left: auto;
+    justify-content: center;
+    align-items: center;
+  }
+  .searchIcon {
+    margin-left: 200px;
+  }
+  .filterItem {
+    margin-right: 390px;
   }
 }

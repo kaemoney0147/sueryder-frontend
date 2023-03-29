@@ -1,5 +1,8 @@
 .resposition-field {
   display: flex;
+  background-color: #f7faff;
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
 .imgContainer {
   flex: 1;
@@ -9,12 +12,15 @@
 }
 .rep-form-cont {
   flex: 4;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 .respForm {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  /* gap: 10px; */
+}
+.respForm > h3 {
+  color: rgb(82, 102, 141);
 }
 .select {
   height: 60px;
@@ -42,7 +48,7 @@
     margin-bottom: 5px;
   }
 }
-@media (max-width: 757px) {
+@media (min-device-width: 400px) and (max-width: 757px) {
   .respBtn {
     display: flex;
     justify-content: space-between;

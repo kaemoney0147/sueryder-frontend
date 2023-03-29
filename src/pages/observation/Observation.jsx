@@ -17,12 +17,13 @@ export default function Observation() {
       );
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setPatient(response);
       } else {
         console.log("error fetching user");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -33,10 +34,12 @@ export default function Observation() {
       <div className="obsWrapper">
         <Card className="FoodchatCard mt-4">
           <Card.Header as="h5" className="text-center">
-            Observation Form For Resident "AT RISK"
+            <h3 className="foodTitle">
+              Observation Form For Resident "AT RISK"
+            </h3>
           </Card.Header>
           <Card.Body>
-            <Card.Text>
+            <div>
               <ul>
                 <li>
                   All residents must be checked as prescribed in accordance with
@@ -54,7 +57,7 @@ export default function Observation() {
                   risk assessment
                 </li>
               </ul>
-            </Card.Text>
+            </div>
           </Card.Body>
         </Card>
         <div id="personalBtn">
@@ -78,7 +81,7 @@ export default function Observation() {
           </div>
           <div className="obsRight">
             <h3>Record Observation</h3>
-            <Form id="form">
+            <Form id="form" className="obsForm">
               <div className="foodFormWrapper">
                 <Form.Group controlId="formGridState">
                   <Form.Label className="FormLabel ">Residual Risk </Form.Label>

@@ -37,6 +37,7 @@
   background-color: #f7faff;
   display: flex;
   flex-wrap: wrap;
+  border-radius: 10px;
 }
 
 .form-group {
@@ -101,7 +102,7 @@
 #personalBtn {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .previousBtn {
   font-size: 1rem;
@@ -150,8 +151,78 @@
   text-align: center;
   margin-bottom: 0;
 }
+table.blueTable {
+  border: 1px solid #1c6ea4;
+  background-color: #eeeeee;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.blueTable td,
+table.blueTable th {
+  border: 1px solid #aaaaaa;
+  padding: 3px 2px;
+}
+table.blueTable tbody td {
+  font-size: 13px;
+}
+table.blueTable tr:nth-child(even) {
+  background: #d0e4f5;
+}
+table.blueTable thead {
+  background: #1c6ea4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1c6ea4 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #5592bb 0%,
+    #327cad 66%,
+    #1c6ea4 100%
+  );
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1c6ea4 100%);
+  border-bottom: 2px solid #444444;
+}
+table.blueTable thead th {
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  border-left: 2px solid #d0e4f5;
+}
+table.blueTable thead th:first-child {
+  border-left: none;
+}
 
-@media (max-width: 800px) {
+table.blueTable tfoot {
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  background: #d0e4f5;
+  background: -moz-linear-gradient(top, #dcebf7 0%, #d4e6f6 66%, #d0e4f5 100%);
+  background: -webkit-linear-gradient(
+    top,
+    #dcebf7 0%,
+    #d4e6f6 66%,
+    #d0e4f5 100%
+  );
+  background: linear-gradient(to bottom, #dcebf7 0%, #d4e6f6 66%, #d0e4f5 100%);
+  border-top: 2px solid #444444;
+}
+table.blueTable tfoot td {
+  font-size: 14px;
+}
+table.blueTable tfoot .links {
+  text-align: right;
+}
+table.blueTable tfoot .links a {
+  display: inline-block;
+  background: #1c6ea4;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.tableBtn {
+  cursor: pointer;
+}
+@media (min-device-width: 800px) and (max-width: 1024px) {
   .inputField {
     width: 310px;
   }
@@ -188,12 +259,12 @@
     margin-top: 0px;
   }
 }
-@media (max-width: 757px) {
-  #foodChartImg {
+@media (min-device-width: 400px) and (max-width: 757px) {
+  .left {
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
-    flex-direction: column-reverse;
   }
   #form {
     display: block;
@@ -217,5 +288,8 @@
   .left > .foodchart-image {
     width: 200px;
     height: 200px;
+  }
+  .blueTable {
+    display: none;
   }
 }

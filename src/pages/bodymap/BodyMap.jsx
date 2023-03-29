@@ -13,10 +13,27 @@ export default function BodyMap() {
   const [review, setReview] = useState("");
   const [signatures, setSignatures] = useState("");
   const [bodymap, setBodyMap] = useState([]);
-  console.log(bodymap);
   const [showContent, setShowContent] = useState(false);
   const param = useParams();
   const userId = param.id;
+  const [sliceIndex, setSliceIndex] = useState(0);
+  const sliceSize = 5;
+
+  const nextSlice = () => {
+    const nextIndex = sliceIndex + sliceSize;
+    if (nextIndex >= bodymap.length) {
+      return;
+    }
+    setSliceIndex(nextIndex);
+  };
+
+  const prevSlice = () => {
+    const prevIndex = sliceIndex - sliceSize;
+    if (prevIndex < 0) {
+      return;
+    }
+    setSliceIndex(prevIndex);
+  };
 
   const data = {
     time: time,
@@ -61,7 +78,9 @@ export default function BodyMap() {
           setBodyMap(fetchedBodyMap);
         }
       } catch (error) {}
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -71,11 +90,11 @@ export default function BodyMap() {
     <Container className="foodChart">
       <div className="foodWrapper mb-3">
         <Card className="FoodchatCard mt-4">
-          <Card.Header as="h5" className="text-center">
+          <Card.Header className="text-center">
             <h3 className="foodTitle">Patient Body Chart</h3>
           </Card.Header>
           <Card.Body>
-            <Card.Text>
+            <div>
               <ul>
                 <li>
                   Please indicate below on the body chart where the patient is
@@ -97,7 +116,7 @@ export default function BodyMap() {
                   complete one
                 </li>
               </ul>
-            </Card.Text>
+            </div>
           </Card.Body>
         </Card>
         <div id="personalBtn">
@@ -216,9 +235,9 @@ export default function BodyMap() {
       </div>
       {showContent && (
         <div>
-          <Table className="foorChartTable mt-2">
+          <table className="blueTable mb-3">
             <thead>
-              <tr className="tr-food">
+              <tr>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Front</th>
@@ -227,19 +246,40 @@ export default function BodyMap() {
                 <th>Signature</th>
               </tr>
             </thead>
+            <tfoot>
+              <tr>
+                <td colSpan="6">
+                  <div className="links">
+                    <a onClick={prevSlice} className="tableBtn">
+                      &laquo;
+                    </a>{" "}
+                    <a className="active" href="#">
+                      1
+                    </a>{" "}
+                    <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>{" "}
+                    <a onClick={nextSlice} className="tableBtn">
+                      &raquo;
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
             <tbody>
-              {bodymap.reverse().map((c) => (
-                <tr key={c._id}>
-                  <td>{c.date}</td>
-                  <td> {c.time}</td>
-                  <td>{c.front}</td>
-                  <td>{c.back}</td>
-                  <td>{c.review}</td>
-                  <td>{c.signatures}</td>
-                </tr>
-              ))}
+              {bodymap
+                .map((c) => (
+                  <tr key={c._id}>
+                    <td>{c.date}</td>
+                    <td> {c.time}</td>
+                    <td>{c.front}</td>
+                    <td>{c.back}</td>
+                    <td>{c.review}</td>
+                    <td>{c.signatures}</td>
+                  </tr>
+                ))
+                .reverse()
+                .slice(sliceIndex, sliceIndex + sliceSize)}
             </tbody>
-          </Table>
+          </table>
         </div>
       )}
     </Container>

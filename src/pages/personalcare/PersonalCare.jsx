@@ -11,7 +11,6 @@ export default function PersonalCare() {
   const navigate = useNavigate();
   const params = useParams();
   const userId = params.id;
-  console.log({ userId });
   const [care, setCare] = useState([]);
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
@@ -63,12 +62,13 @@ export default function PersonalCare() {
       );
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setCare(response);
       } else {
         console.log("error fetching user");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     fetchCare();
@@ -102,7 +102,9 @@ export default function PersonalCare() {
       } else {
         console.log("something went wrong");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   const fetchUserbyId = async () => {
     try {
@@ -111,12 +113,13 @@ export default function PersonalCare() {
       );
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setPatient(response);
       } else {
         console.log("error fetching user");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     fetchUserbyId();
@@ -124,7 +127,7 @@ export default function PersonalCare() {
   return (
     <>
       <Container>
-        <div className="personcare-maincontainer">
+        <div className="personcare-maincontainer mb-3 mt-4">
           <div className="personalcare-textarea">
             <div className="personcareInfo">
               <h1>Clinical Daily Journal</h1>
@@ -264,46 +267,56 @@ export default function PersonalCare() {
             </div>
           </div>
         </div>
-      </Container>
-      {showContent && (
-        <div>
-          <Table className="table mt-2">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Person care</th>
-                <th>DayChecks</th>
-                <th>NightChecks</th>
-                <th>Carer</th>
-              </tr>
-            </thead>
-            <tbody>
-              {care.reverse().map((c) => (
-                <tr key={c._id}>
-                  <td>{c.date}</td>
-                  <td> {c.time}</td>
-                  <td>{c.caregive}</td>
-                  <td>{c.daychecks}</td>
-                  <td>{c.nightchecks}</td>
-
-                  <td>{c.givenby}</td>
+        {showContent && (
+          <div>
+            <table className="blueTable mb-3">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Person care</th>
+                  <th>Day Checks</th>
+                  <th>Night Checks</th>
+                  <th>Carer</th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-          <div className="tabelBtn">
-            <span className="previousBtn">
-              <AiOutlineArrowLeft onClick={prevSlice} />
-              Prev
-            </span>
-            <span className="previousBtn">
-              Next
-              <AiOutlineArrowRight onClick={nextSlice} />
-            </span>
+              </thead>
+              <tfoot>
+                <tr>
+                  <td colSpan="6">
+                    <div className="links">
+                      <a onClick={prevSlice} className="tableBtn">
+                        &laquo;
+                      </a>{" "}
+                      <a class="active" href="#">
+                        1
+                      </a>{" "}
+                      <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>{" "}
+                      <a onClick={nextSlice} className="tableBtn">
+                        &raquo;
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </tfoot>
+              <tbody>
+                {care
+                  .map((c) => (
+                    <tr key={c._id}>
+                      <td>{c.date}</td>
+                      <td> {c.time}</td>
+                      <td>{c.caregive}</td>
+                      <td>{c.daychecks}</td>
+                      <td>{c.nightchecks}</td>
+                      <td>{c.givenby}</td>
+                    </tr>
+                  ))
+                  .reverse()
+                  .slice(sliceIndex, sliceIndex + sliceSize)}
+              </tbody>
+            </table>
           </div>
-        </div>
-      )}
+        )}
+      </Container>
     </>
   );
 }

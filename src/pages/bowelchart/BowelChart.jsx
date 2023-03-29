@@ -43,7 +43,6 @@ export default function BowelChart() {
       const url = await fetch(`http://localhost:3001/patient/${id}`);
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setPatient(response);
       } else {
         console.log("error fetching user");
@@ -57,7 +56,6 @@ export default function BowelChart() {
       );
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setFoood(response);
       } else {
         console.log("error fetching user");
@@ -92,34 +90,28 @@ export default function BowelChart() {
       );
       if (url.ok) {
         alert("You have successfully save a bowel for the patient");
+        setAmount("");
+        setDate("");
+        setIntervention("");
+        setSignature("");
+        setTime("");
+        setType("");
       } else {
         console.log("something went wrong");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Container className="foodChart">
       <div className="foodWrapper mb-3">
-        {/* <h3 className="foodTitle"> Daily Patient Bowel Chart</h3> */}
-        {/* <div className="foodListNote">
-          <ul className="foodchartListItem">
-            <li>Complete this bowel form each time a patient open one</li>
-            <li>
-              Please do not leave it until the end of the day or you may forget.
-            </li>
-            <li>
-              specify the quantity of food eaten by filling the approriate
-              amount
-            </li>
-            <li>Even if no food is taken, whereable please hight reason.</li>
-          </ul>
-        </div> */}
         <Card className="FoodchatCard mt-4">
           <Card.Header as="h5" className="text-center">
-            Daily Patient Bowel Chart
+            <h3 className="foodTitle"> Daily Patient Bowel Chart</h3>
           </Card.Header>
           <Card.Body>
-            <Card.Text>
+            <div>
               <ul>
                 <li>
                   Complete this food chart each time you offer food to a patient
@@ -136,7 +128,7 @@ export default function BowelChart() {
                   Even if no food is taken, whereable please hight reason.
                 </li>
               </ul>
-            </Card.Text>
+            </div>
           </Card.Body>
         </Card>
         <div id="personalBtn">
@@ -270,9 +262,9 @@ export default function BowelChart() {
       </div>
       {showContent && (
         <div>
-          <Table className="foorChartTable mt-2">
+          <table className="blueTable mb-3">
             <thead>
-              <tr className="tr-food">
+              <tr>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Amount</th>
@@ -281,29 +273,40 @@ export default function BowelChart() {
                 <th>Carers</th>
               </tr>
             </thead>
+            <tfoot>
+              <tr>
+                <td colSpan="6">
+                  <div className="links">
+                    <a onClick={prevSlice} className="tableBtn">
+                      &laquo;
+                    </a>{" "}
+                    <a className="active" href="#">
+                      1
+                    </a>{" "}
+                    <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>{" "}
+                    <a onClick={nextSlice} className="tableBtn">
+                      &raquo;
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
             <tbody>
-              {food.reverse().map((c) => (
-                <tr key={c._id}>
-                  <td className="td">{c.date}</td>
-                  <td className="td"> {c.time}</td>
-                  <td className="td">{c.amount}</td>
-                  <td className="td">{c.type}</td>
-                  <td className="td">{c.intervention}</td>
-                  <td className="td">{c.signature}</td>
-                </tr>
-              ))}
+              {food
+                .map((c) => (
+                  <tr key={c._id}>
+                    <td>{c.date}</td>
+                    <td> {c.time}</td>
+                    <td>{c.amount}</td>
+                    <td>{c.type}</td>
+                    <td>{c.intervention}</td>
+                    <td>{c.signature}</td>
+                  </tr>
+                ))
+                .reverse()
+                .slice(sliceIndex, sliceIndex + sliceSize)}
             </tbody>
-          </Table>
-          <div className="tabelBtn">
-            <span className="previousBtn">
-              <AiOutlineArrowLeft onClick={prevSlice} />
-              Prev
-            </span>
-            <span className="previousBtn">
-              Next
-              <AiOutlineArrowRight onClick={nextSlice} />
-            </span>
-          </div>
+          </table>
         </div>
       )}
     </Container>

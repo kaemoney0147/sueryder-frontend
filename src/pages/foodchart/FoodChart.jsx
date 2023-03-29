@@ -3,8 +3,8 @@ import { Button, Card, Container, Form, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "../foodchart/foodchart.css";
-import { MdArrowForward } from "react-icons/md";
-import { BiArrowBack } from "react-icons/bi";
+// import { MdArrowForward } from "react-icons/md";
+// import { BiArrowBack } from "react-icons/bi";
 
 export default function FoodChart() {
   const [timeofday, setTimeofday] = useState("");
@@ -47,7 +47,7 @@ export default function FoodChart() {
       const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/${id}`);
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
+
         setPatient(response);
       } else {
         console.log("error fetching user");
@@ -61,7 +61,7 @@ export default function FoodChart() {
       );
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
+
         setFoood(response);
       } else {
         console.log("error fetching user");
@@ -107,14 +107,16 @@ export default function FoodChart() {
       } else {
         console.log("something went wrong");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <Container className="foodChart mt-5 ">
       <div className="foodWrapper">
         <Card className="FoodchatCard">
           <Card.Header as="h5" className="text-center">
-            24hours Food Intake Chart
+            <h3 className="foodTitle">24Hours Food Intake Chart</h3>
           </Card.Header>
           <Card.Body>
             <div>
@@ -173,6 +175,7 @@ export default function FoodChart() {
                     onChange={(e) => setTimeofday(e.target.value)}
                     required
                   >
+                    <option>Select</option>
                     <option>Breakfast</option>
                     <option>Lunch</option>
                     <option>Dinner</option>
@@ -257,7 +260,7 @@ export default function FoodChart() {
                 type="submit"
                 onClick={handleSubmit}
               >
-                Submit
+                Save
               </Button>
               <span className="ViewBtn">
                 <Button
@@ -265,7 +268,7 @@ export default function FoodChart() {
                   type="submit"
                   onClick={handleClick}
                 >
-                  View
+                  View Chart
                 </Button>
               </span>
             </div>
@@ -274,9 +277,9 @@ export default function FoodChart() {
       </div>
       {showContent && (
         <div>
-          <Table className="foorChartTable mt-2">
+          <table className="blueTable mb-3">
             <thead>
-              <tr className="tr-food">
+              <tr>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Offered</th>
@@ -285,32 +288,40 @@ export default function FoodChart() {
                 <th>Givenby</th>
               </tr>
             </thead>
+            <tfoot>
+              <tr>
+                <td colSpan="6">
+                  <div className="links">
+                    <a onClick={prevSlice} className="tableBtn">
+                      &laquo;
+                    </a>{" "}
+                    <a className="active" href="#">
+                      1
+                    </a>{" "}
+                    <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>{" "}
+                    <a onClick={nextSlice} className="tableBtn">
+                      &raquo;
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
             <tbody>
               {food
                 .map((c) => (
                   <tr key={c._id}>
-                    <td className="td">{c.date}</td>
-                    <td className="td"> {c.time}</td>
-                    <td className="td">{c.offered}</td>
-                    <td className="td">{c.amountoffered}</td>
-                    <td className="td">{c.amountaccepted}</td>
-                    <td className="td">{c.givenby}</td>
+                    <td>{c.date}</td>
+                    <td>{c.time}</td>
+                    <td>{c.offered}</td>
+                    <td>{c.amountoffered}</td>
+                    <td>{c.amountaccepted}</td>
+                    <td>{c.givenby}</td>
                   </tr>
                 ))
                 .reverse()
                 .slice(sliceIndex, sliceIndex + sliceSize)}
             </tbody>
-          </Table>
-          <div className="tabelBtn">
-            <span className="previousBtn">
-              <BiArrowBack onClick={prevSlice} />
-              Prev
-            </span>
-            <span className="previousBtn">
-              Next
-              <MdArrowForward onClick={nextSlice} />
-            </span>
-          </div>
+          </table>
         </div>
       )}
     </Container>

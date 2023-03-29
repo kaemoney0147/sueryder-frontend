@@ -13,7 +13,24 @@ export default function Reposition() {
   const [showContent, setShowContent] = useState(false);
   const [respo, setRespo] = useState("");
   const navigate = useNavigate();
+  const [sliceIndex, setSliceIndex] = useState(0);
+  const sliceSize = 5;
 
+  const nextSlice = () => {
+    const nextIndex = sliceIndex + sliceSize;
+    if (nextIndex >= resp.length) {
+      return;
+    }
+    setSliceIndex(nextIndex);
+  };
+
+  const prevSlice = () => {
+    const prevIndex = sliceIndex - sliceSize;
+    if (prevIndex < 0) {
+      return;
+    }
+    setSliceIndex(prevIndex);
+  };
   const handleClick = () => {
     setShowContent(!showContent);
   };
@@ -51,7 +68,9 @@ export default function Reposition() {
       } else {
         console.log("something went wrong");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const fetchReposition = async () => {
@@ -61,12 +80,13 @@ export default function Reposition() {
       );
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setRespo(response);
       } else {
         console.log("error fetching user");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
   useEffect(() => {
     fetchReposition();
@@ -75,10 +95,13 @@ export default function Reposition() {
     <Container>
       <Card className="FoodchatCard mt-4">
         <Card.Header as="h5" className="text-center">
-          Daily Repositioning & Skin inspection Chart
+          <h3 className="foodTitle">
+            {" "}
+            Daily Repositioning & Skin inspection Chart
+          </h3>
         </Card.Header>
         <Card.Body>
-          <Card.Text>
+          <div>
             <ul>
               <li>
                 Complete this food chart each time you offer food to a patient
@@ -93,7 +116,7 @@ export default function Reposition() {
               </li>
               <li>Even if no food is taken, whereable please hight reason.</li>
             </ul>
-          </Card.Text>
+          </div>
         </Card.Body>
       </Card>
 
@@ -109,7 +132,7 @@ export default function Reposition() {
           Next
         </span>
       </div>
-      <div className="resposition-field mt-5">
+      <div className="resposition-field mt-2">
         <div className="imgContainer">
           <img
             className="rep-image"
@@ -118,7 +141,8 @@ export default function Reposition() {
           />
         </div>
         <div className="rep-form-cont">
-          <Form className="respForm">
+          <Form className="respForm mt-2">
+            <h3>Record Position</h3>
             <div className="foodFormWrapper">
               <Form.Group className="form-group">
                 <Form.Label className="FormLabel">Date</Form.Label>
@@ -176,7 +200,7 @@ export default function Reposition() {
               />
             </Form.Group>
           </Form>
-          <div className="respBtn mb-3">
+          <div className="respBtn foodchartBtn mb-3">
             <Button
               id="submitAdmissionBtn"
               type="submit"
@@ -194,9 +218,9 @@ export default function Reposition() {
       </div>
       {showContent && (
         <div>
-          <Table className="foorChartTable mt-2">
+          <table className="blueTable mb-3">
             <thead>
-              <tr className="tr-food">
+              <tr>
                 <th>Date</th>
                 <th>Time</th>
                 <th>Position</th>
@@ -204,18 +228,39 @@ export default function Reposition() {
                 <th>Signatures</th>
               </tr>
             </thead>
+            <tfoot>
+              <tr>
+                <td colSpan="6">
+                  <div className="links">
+                    <a onClick={prevSlice} className="tableBtn">
+                      &laquo;
+                    </a>{" "}
+                    <a className="active" href="#">
+                      1
+                    </a>{" "}
+                    <a href="#">2</a> <a href="#">3</a> <a href="#">4</a>{" "}
+                    <a onClick={nextSlice} className="tableBtn">
+                      &raquo;
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            </tfoot>
             <tbody>
-              {respo.reverse().map((c) => (
-                <tr key={c._id}>
-                  <td>{c.date}</td>
-                  <td> {c.time}</td>
-                  <td>{c.position}</td>
-                  <td>{c.comment}</td>
-                  <td>{c.signatures}</td>
-                </tr>
-              ))}
+              {respo
+                .map((c) => (
+                  <tr key={c._id}>
+                    <td>{c.date}</td>
+                    <td> {c.time}</td>
+                    <td>{c.position}</td>
+                    <td>{c.comment}</td>
+                    <td>{c.signatures}</td>
+                  </tr>
+                ))
+                .reverse()
+                .slice(sliceIndex, sliceIndex + sliceSize)}
             </tbody>
-          </Table>
+          </table>
         </div>
       )}
     </Container>

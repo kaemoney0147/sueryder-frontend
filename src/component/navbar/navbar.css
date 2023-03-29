@@ -40,7 +40,7 @@
   text-decoration: underline 1px solid dimgrey;
 }
 
-@media (max-width: 757px) {
+@media (min-device-width: 400px) and (max-width: 768px) {
   /* #navbarScrollingDropdown,
   .nav-text {
     display: none;

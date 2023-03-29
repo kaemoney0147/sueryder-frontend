@@ -1,11 +1,11 @@
 .personcare-maincontainer {
   display: flex;
+  background-color: #f7faff;
+  border-radius: 10px;
 }
 #personalCareForm {
   display: flex;
   flex-wrap: wrap;
-
-  /* flex-direction: column; */
 }
 #personcareFormWrapper {
   display: flex;
@@ -18,11 +18,14 @@
   width: 300px;
 }
 .personlCareTextarea {
-  width: 100%;
+  width: 600px;
 }
-textarea.form-control {
-  height: 400px;
+
+.personlCareTextarea.form-control {
+  height: 200px;
+  width: 980px;
 }
+
 .personalBtn {
   display: flex;
   align-items: center;
@@ -35,13 +38,15 @@ textarea.form-control {
   margin-top: 4px;
 }
 .personcareInfo {
-  font-size: 15px;
+  margin-left: 10px;
+  font-size: 20px;
   font-weight: 600;
-  margin-top: 10px;
+  color: rgb(82, 102, 141);
 }
 .personcareInfo > h1 {
   font-size: 30px;
   color: coral;
+  text-align: center;
 }
 @media (max-width: 800px) {
   .personlCareTextarea {
@@ -54,12 +59,24 @@ textarea.form-control {
     display: flex;
     /* flex-direction: column; */
   }
+  .personlCareTextarea.form-control {
+    height: 200px;
+    width: 670px;
+  }
 }
-@media (max-width: 757px) {
-  .personlCareTextarea {
-    width: 460px;
+@media (min-device-width: 400px) and (max-width: 757px) {
+  .personlCareTextarea.form-control {
+    height: 200px;
+    width: 450px;
   }
   .personalcareInputfield {
-    width: 460px;
+    width: 450px;
+  }
+  #personalCareForm {
+    display: block;
+    /* flex-direction: column; */
+  }
+  .personcareInfo > h1 {
+    text-align: left;
   }
 }

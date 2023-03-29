@@ -1,13 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { persistor } from "../../redux/store/index.js";
-import {
-  Button,
-  Container,
-  Form,
-  Nav,
-  Navbar,
-  NavDropdown,
-} from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../redux/actions/index.js";
@@ -70,9 +63,6 @@ export default function NavBar() {
             <Nav.Link href="/" className="nav-text">
               Home
             </Nav.Link>
-            {/* <Nav.Link href="#action2" className="nav-text">
-              All
-            </Nav.Link> */}
             <NavDropdown
               title="General Task"
               id="navbarScrollingDropdown"

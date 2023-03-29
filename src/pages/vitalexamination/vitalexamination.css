@@ -5,7 +5,7 @@
   border-radius: 10px;
   cursor: pointer;
 }
-@media (max-width: 757px) {
+@media (min-device-width: 400px) and (max-width: 757px) {
   .left > .vitalChart-image {
     width: 200px;
     height: 200px;
