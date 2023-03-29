@@ -8,7 +8,6 @@ import "../patientdetails/patientdetails.css";
 export default function PatientDetails() {
   const params = useParams();
   const id = params.id;
-  console.log(id);
   const [data, setData] = useState([]);
 
   const fetchUserbyId = async () => {
@@ -16,7 +15,6 @@ export default function PatientDetails() {
       const url = await fetch(`${process.env.REACT_APP_BE_URL}/patient/${id}`);
       if (url.ok) {
         const response = await url.json();
-        console.log(response);
         setData(response);
       } else {
         console.log("error fetching user");
