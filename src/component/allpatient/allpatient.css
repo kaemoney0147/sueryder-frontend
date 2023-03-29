@@ -8,7 +8,6 @@
 
 #patientlistCard:hover {
   transform: scale(1.02);
-  box-shadow: 3px 3px 2px gray;
 }
 #patientlistCard {
   display: flex;

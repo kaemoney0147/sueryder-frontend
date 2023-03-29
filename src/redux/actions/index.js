@@ -20,7 +20,9 @@ export const getAllPatient = () => {
           payload: fetchedData,
         });
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 
@@ -73,7 +75,7 @@ export const getAccessToken = (userLogin) => {
                 Authorization: "Bearer " + tokenReceived,
               },
             };
-            const userResponse = await fetch(`${apiUrl} /users/me`, opts);
+            const userResponse = await fetch(`${apiUrl}/users/me`, opts);
             if (userResponse.ok) {
               const user = await userResponse.json();
 

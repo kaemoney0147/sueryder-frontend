@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Card, Container, ListGroup } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
 import "../patientdetails/patientdetails.css";
 
@@ -58,27 +58,33 @@ export default function PatientDetails() {
         </Link>
       </div>
 
-      <div className="patient-history">
-        <div className="image-details">
-          <img src={data.image} alt="imag" className="patientDetails-img" />
-        </div>
-        <div className="patient-details patientInfo mt-3">
-          Name: {data.title} {data.firstName} {data.lastName}
-          <p className="patientInfo mb-0">Age: {data.Age}</p>
-          <p className="patientInfo mb-0">Date of birth: {data.dob}</p>
-          <p className="patientInfo mb-0">Gender: {data.Gender}</p>
-          <p className="patientInfo">NHS NO: 1234567</p>
-          <p className="patientInfo">Allocated Ward: {data.ward}</p>
-          <p className="patientInfo">Room No: {data.room}</p>
-        </div>
+      <div className="datails">
+        <Card id="patient-history">
+          <Card.Img src={data.image} id="patientDetails-img" />
+          <Card.Body id="detailsCard">
+            <ListGroup id="patient-details">
+              <ListGroup.Item>
+                Name: {data.title} {data.firstName} {data.lastName}
+              </ListGroup.Item>
+              <ListGroup.Item>Date of birth: {data.dob}</ListGroup.Item>
+              <ListGroup.Item>Gender: {data.Gender}</ListGroup.Item>
+              <ListGroup.Item>Allocated Ward: {data.ward}</ListGroup.Item>
+              <ListGroup.Item>Room No: {data.room}</ListGroup.Item>
+            </ListGroup>
+          </Card.Body>
+        </Card>
       </div>
       <div>
-        <div className="discription mt-5">
-          <h3 className="discriptionTitle">Patient History</h3>
-          {data.discription}
-        </div>
+        <Card id="discriptionCard">
+          <Card.Header className="discriptionTitle">
+            Patient History
+          </Card.Header>
+          <Card.Body>
+            <Card.Text>{data.discription}</Card.Text>
+          </Card.Body>
+        </Card>
       </div>
-      <div className="d-flex mt-3">
+      <div className="d-flex mb-3 mt-2">
         <Link to={"/"}>
           <Button id="button">Back Home</Button>
         </Link>
