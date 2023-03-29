@@ -19,7 +19,6 @@ import { LIST_OF_QUERY } from "../../redux/actions/index.js";
 
 export default function AllPatient() {
   const querylist = useSelector((state) => state.query.query);
-  console.log(querylist);
   const dispatch = useDispatch();
   const [codiocte, setCodicote] = useState([]);
   const [digswell, setDigswell] = useState([]);
@@ -33,7 +32,6 @@ export default function AllPatient() {
     return diffDays;
   }
 
-  console.log(allPatient);
   const [query, setQuery] = useState("");
 
   const handleChange = (e) => {

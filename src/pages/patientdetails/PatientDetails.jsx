@@ -66,10 +66,14 @@ export default function PatientDetails() {
               <ListGroup.Item>
                 Name: {data.title} {data.firstName} {data.lastName}
               </ListGroup.Item>
-              <ListGroup.Item>Date of birth: {data.dob}</ListGroup.Item>
+              <ListGroup.Item>Date of Birth: {data.dob}</ListGroup.Item>
               <ListGroup.Item>Gender: {data.Gender}</ListGroup.Item>
+              <ListGroup.Item>NHS NO: 2173663-02</ListGroup.Item>
               <ListGroup.Item>Allocated Ward: {data.ward}</ListGroup.Item>
               <ListGroup.Item>Room No: {data.room}</ListGroup.Item>
+              <ListGroup.Item>
+                Admission Date: {data.admission.date}
+              </ListGroup.Item>
             </ListGroup>
           </Card.Body>
         </Card>
