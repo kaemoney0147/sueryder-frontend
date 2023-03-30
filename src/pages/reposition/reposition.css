@@ -34,7 +34,7 @@
   display: flex;
   gap: 142px;
 }
-@media (max-width: 800px) {
+@media (min-width: 820px) and (max-width: 1024px) {
   .resposition-field {
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@
     margin-bottom: 5px;
   }
 }
-@media (min-device-width: 400px) and (max-width: 757px) {
+@media (min-width: 757px) and(max-width: 1180px) {
   .respBtn {
     display: flex;
     justify-content: space-between;

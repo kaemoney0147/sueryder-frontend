@@ -112,17 +112,19 @@
   font-size: 0.8rem;
   padding: 0.2rem 0.5rem;
 }
+
 #patientDiplaysCard {
   margin-top: 20px;
   padding-inline: 70px;
 }
-@media (min-width: 768px) and (max-width: 1042px) {
+@media (min-device-width: 820px) and (max-width: 1180px) {
   .searchIcon {
     margin-left: 550px;
   }
   #patientDiplaysCard {
     margin-top: 20px;
     padding-inline: 30px;
+    display: flex;
   }
   #filterIcon {
     color: gray;
@@ -133,7 +135,7 @@
     margin-left: 33px;
   }
 }
-@media (min-device-width: 400px) and (max-width: 768px) {
+@media (min-device-width: 390px) and (max-width: 768px) {
   #patientDiplaysCard {
     display: flex;
     flex-direction: column;
@@ -165,5 +167,15 @@
   }
   .filterItem {
     margin-right: 390px;
+  }
+  #patientDiplaysCard {
+    margin-top: 20px;
+    padding-inline: 40px;
+  }
+}
+@media (min-device-width: 390px) and (max-width: 840px) {
+  .allPatientContainer {
+    padding-left: 0;
+    padding-right: 0;
   }
 }

@@ -85,22 +85,18 @@
   border: none;
   color: rgb(82, 102, 141);
 }
-@media (max-width: 800px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   .patientDetails-img {
     width: 400px;
   }
   .fluid-container {
     margin-top: 10px;
-    /* padding-right: 0;
-    padding-left: 0;
-    margin-right: 0;
-    margin-left: 0; */
     display: flex;
     justify-content: left;
     width: 100%;
   }
 }
-@media (max-width: 757px) {
+@media (min-device-width: 390px) and (max-width: 844px) {
   .patient-history {
     display: flex;
     flex-direction: column-reverse;
@@ -114,7 +110,7 @@
   }
   .fluid-container {
     display: grid;
-    grid-template-columns: repeat(3, 0fr);
+    grid-template-columns: repeat(4, 1fr);
     margin-top: 10px;
   }
 
@@ -131,5 +127,12 @@
   #detailsCard {
     width: 100%;
     margin-left: 0;
+  }
+}
+@media (min-device-width: 390px) and (max-width: 757px) {
+  .fluid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 10px;
   }
 }

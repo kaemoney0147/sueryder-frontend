@@ -28,7 +28,7 @@
   font-family: "SF Pro Text", "SF Pro Icons", "AOS Icons", "Helvetica Neue",
     Helvetica, Arial, sans-serif;
 }
-@media (min-device-width: 400px) and (max-width: 768px) {
+@media (min-device-width: 390px) and (max-width: 840px) {
   .homepage-image {
     width: 300px;
     margin-right: 50px;

@@ -40,16 +40,17 @@
   text-decoration: underline 1px solid dimgrey;
 }
 
-@media (min-device-width: 400px) and (max-width: 768px) {
-  /* #navbarScrollingDropdown,
-  .nav-text {
-    display: none;
-  } */
+@media (min-width: 757px) and(max-width: 1180px) {
   .topbarImageContainer {
     display: flex;
   }
   #dropwonLIST {
     margin-left: 0;
     padding: 5px;
+  }
+}
+@media (min-device-width: 390px) and (max-width: 757px) {
+  .me-auto {
+    display: none;
   }
 }

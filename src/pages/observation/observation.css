@@ -37,7 +37,7 @@
   margin-top: 10px;
   color: rgb(82, 102, 141);
 }
-@media (max-width: 800px) {
+@media (min-width: 820px) and (max-width: 1024px) {
   .ObsInfo {
     display: flex;
     flex-direction: column;
@@ -69,7 +69,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (min-width: 757px) and(max-width: 1180px) {
   #personalCareForm {
     margin-left: 10px;
   }

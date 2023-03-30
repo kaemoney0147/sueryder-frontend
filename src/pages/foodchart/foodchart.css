@@ -222,9 +222,9 @@ table.blueTable tfoot .links a {
 .tableBtn {
   cursor: pointer;
 }
-@media (min-device-width: 800px) and (max-width: 1024px) {
+@media (min-width: 820px) and (max-width: 1024px) {
   .inputField {
-    width: 310px;
+    width: 300px;
   }
   #form {
     display: flex;
@@ -258,13 +258,17 @@ table.blueTable tfoot .links a {
   .foodChartForm {
     margin-top: 0px;
   }
+  .foodchartBtn {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
 }
-@media (min-device-width: 400px) and (max-width: 757px) {
+@media (min-width: 757px) and(max-width: 1180px) {
   .left {
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
-    justify-content: center;
   }
   #form {
     display: block;
@@ -272,13 +276,15 @@ table.blueTable tfoot .links a {
   }
   .foodchartBtn {
     display: flex;
+    justify-content: space-between;
     gap: 10px;
   }
   .inputField {
-    width: 420px;
+    width: 400px;
   }
   .foodFormWrapper {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .formTitle {
@@ -291,5 +297,34 @@ table.blueTable tfoot .links a {
   }
   .blueTable {
     display: none;
+  }
+  .inputField {
+    width: 100px;
+  }
+  .foodchartBtn {
+    display: flex;
+    margin-right: 10px;
+  }
+}
+
+@media (min-device-width: 390px) and (max-width: 757px) {
+  .foodFormWrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .inputField {
+    width: 300px;
+  }
+  #form {
+    display: block;
+    width: 100%;
+    margin-top: 0;
+  }
+  .ViewBtn {
+    margin-right: 40px;
+  }
+  .left > .foodchart-image {
+    width: 300px;
+    height: 250px;
   }
 }

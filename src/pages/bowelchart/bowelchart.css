@@ -29,7 +29,7 @@
   margin-top: 10px;
   color: rgb(82, 102, 141);
 }
-@media (max-width: 800px) {
+@media (min-width: 820px) and (max-width: 1024px) {
   .bowelChartForm {
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@
     height: 300px;
   }
 }
-@media (min-device-width: 400px) and (max-width: 757px) {
+@media (min-width: 757px) and(max-width: 1180px) {
   .bowelLeft > .bowelChart-image {
     width: 200px;
     height: 150px;

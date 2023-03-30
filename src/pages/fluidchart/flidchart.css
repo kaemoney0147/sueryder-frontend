@@ -112,7 +112,7 @@
 .fluidTr {
   border-bottom: 3px solid gray;
 }
-@media (max-width: 800px) {
+@media (min-width: 820px) and (max-width: 1024px) {
   .inputField {
     width: 310px;
   }
@@ -154,7 +154,7 @@
     margin-top: 0px;
   }
 }
-@media (min-device-width: 400px) and (max-width: 757px) {
+@media (min-width: 757px) and(max-width: 1180px) {
   #foodChartImg {
     display: flex;
     align-items: center;

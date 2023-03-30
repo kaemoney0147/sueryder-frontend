@@ -48,7 +48,7 @@
   color: coral;
   text-align: center;
 }
-@media (max-width: 800px) {
+@media (min-width: 820px) and (max-width: 1024px) {
   .personlCareTextarea {
     width: 670px;
   }
@@ -64,13 +64,13 @@
     width: 670px;
   }
 }
-@media (min-device-width: 400px) and (max-width: 757px) {
+@media (min-width: 757px) and(max-width: 1180px) {
   .personlCareTextarea.form-control {
     height: 200px;
-    width: 450px;
+    width: 350px;
   }
   .personalcareInputfield {
-    width: 450px;
+    width: 350px;
   }
   #personalCareForm {
     display: block;

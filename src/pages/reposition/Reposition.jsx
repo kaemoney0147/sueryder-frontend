@@ -90,6 +90,7 @@ export default function Reposition() {
   };
   useEffect(() => {
     fetchReposition();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Container>

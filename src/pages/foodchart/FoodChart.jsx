@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Container, Form, Table } from "react-bootstrap";
+import { Button, Card, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "../foodchart/foodchart.css";
@@ -115,7 +115,7 @@ export default function FoodChart() {
     <Container className="foodChart mt-5 ">
       <div className="foodWrapper">
         <Card className="FoodchatCard">
-          <Card.Header as="h5" className="text-center">
+          <Card.Header className="text-center">
             <h3 className="foodTitle">24Hours Food Intake Chart</h3>
           </Card.Header>
           <Card.Body>
