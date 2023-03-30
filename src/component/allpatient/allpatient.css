@@ -173,9 +173,19 @@
     padding-inline: 40px;
   }
 }
-@media (min-device-width: 390px) and (max-width: 840px) {
+@media (min-device-width: 400px) and (max-width: 757px) {
   .allPatientContainer {
-    padding-left: 0;
-    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #patientDiplaysCard {
+    margin-top: 20px;
+    padding-inline: none;
+  }
+  .searchIcon {
+    margin-left: 200px;
+  }
+  #filterIcon {
+    margin-left: 27px;
   }
 }
