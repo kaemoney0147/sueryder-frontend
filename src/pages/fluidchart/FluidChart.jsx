@@ -86,7 +86,7 @@ export default function FluidChart() {
       if (url.ok) {
         const response = await url.json();
         setFluid(response);
-        const total = totalaccept(response);
+        // const total = totalaccept(response);
       } else {
         console.log("error fetching user");
       }
@@ -190,12 +190,12 @@ export default function FluidChart() {
                 <Form.Group controlId="formGridState">
                   <Form.Label className="FormLabel ">Period: </Form.Label>
                   <select
-                    className="inputField"
+                    className="inputField foodSelect"
                     value={timeofday}
                     onChange={(e) => setTimeofday(e.target.value)}
                     required
                   >
-                    <option>Select</option>
+                    <option>Please Select</option>
                     <option>Breakfast</option>
                     <option>Lunch</option>
                     <option>Dinner</option>
@@ -207,12 +207,12 @@ export default function FluidChart() {
                 <Form.Group controlId="formGridState">
                   <Form.Label className="FormLabel ">Route </Form.Label>
                   <select
-                    className="inputField"
+                    className="inputField foodSelect"
                     value={route}
                     onChange={(e) => setRoute(e.target.value)}
                     required
                   >
-                    <option>Select</option>
+                    <option>Please Select</option>
                     <option>Peg</option>
                     <option>Oral</option>
                   </select>
@@ -328,7 +328,7 @@ export default function FluidChart() {
                   type="submit"
                   onClick={handleClick}
                 >
-                  View
+                  View Chart
                 </Button>
               </span>
             </div>

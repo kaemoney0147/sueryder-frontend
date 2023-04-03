@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import "../personalcare/personalcare.css";
-import { Button, Container, Form, Table } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
@@ -261,7 +261,7 @@ export default function PersonalCare() {
                     handleClick();
                   }}
                 >
-                  View
+                  View Chart
                 </Button>
               </span>
             </div>

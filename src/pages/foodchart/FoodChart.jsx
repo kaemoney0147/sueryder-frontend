@@ -170,12 +170,12 @@ export default function FoodChart() {
                 <Form.Group controlId="formGridState">
                   <Form.Label className="FormLabel ">Period: </Form.Label>
                   <select
-                    className="inputField "
+                    className="inputField foodSelect"
                     value={timeofday}
                     onChange={(e) => setTimeofday(e.target.value)}
                     required
                   >
-                    <option>Select</option>
+                    <option>Please Select</option>
                     <option>Breakfast</option>
                     <option>Lunch</option>
                     <option>Dinner</option>
@@ -220,26 +220,34 @@ export default function FoodChart() {
               </div>
               <div className="foodFormWrapper">
                 <Form.Group className="form-group mb-0">
-                  <Form.Label className="FormLabel ">offer</Form.Label>
-                  <Form.Control
-                    className="inputField"
-                    type="text"
-                    placeholder="Amount Offered?"
+                  <Form.Label className="FormLabel ">Amount</Form.Label>
+                  <select
+                    className="inputField foodSelect"
                     value={amountoffered}
                     onChange={(e) => setAmountoffered(e.target.value)}
                     required
-                  />
+                  >
+                    <option>Please Select</option>
+                    <option>Full Plate</option>
+                    <option>Meat Plate</option>
+                    <option>Joint Plate</option>
+                  </select>
                 </Form.Group>
                 <Form.Group className="form-group mb-0">
                   <Form.Label className="FormLabel ">Accept</Form.Label>
-                  <Form.Control
-                    className="inputField"
-                    type="text"
-                    placeholder="Amount Accepted?"
+                  <select
+                    className="inputField foodSelect"
                     value={amountaccepted}
                     onChange={(e) => setAmountaccepted(e.target.value)}
                     required
-                  />
+                  >
+                    <option>Please Select</option>
+                    <option>Refuse</option>
+                    <option>Decline</option>
+                    <option>All</option>
+                    <option>Half</option>
+                    <option>Small</option>
+                  </select>
                 </Form.Group>
               </div>
               <Form.Group className="form-group mb-0">

@@ -211,7 +211,7 @@ export default function Reposition() {
             </Button>
             <span className="ViewBtn">
               <Button id="submitAdmissionBtn" onClick={handleClick}>
-                View
+                View Chart
               </Button>
             </span>
           </div>

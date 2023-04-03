@@ -184,7 +184,7 @@ export default function BowelChart() {
                 <Form.Group controlId="formGridState">
                   <Form.Label className="FormLabel">Amount </Form.Label>
                   <select
-                    className="inputField"
+                    className="inputField foodSelect "
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     required
@@ -198,7 +198,7 @@ export default function BowelChart() {
                 <Form.Group controlId="formGridState">
                   <Form.Label className="FormLabel">Type </Form.Label>
                   <select
-                    className="inputField"
+                    className="inputField foodSelect "
                     value={type}
                     onChange={(e) => setType(e.target.value)}
                     required
@@ -217,14 +217,17 @@ export default function BowelChart() {
               <div className="foodFormWrapper">
                 <Form.Group className="form-group mb-0">
                   <Form.Label className="FormLabel">Intervention</Form.Label>
-                  <Form.Control
-                    className="inputField"
-                    type="text"
-                    placeholder="Suppository"
+                  <select
+                    className="inputField foodSelect"
                     value={intervention}
                     onChange={(e) => setIntervention(e.target.value)}
                     required
-                  />
+                  >
+                    <option>Please Select</option>
+                    <option>Pad Change</option>
+                    <option>Wash and Dress</option>
+                    <option>Shower</option>
+                  </select>
                 </Form.Group>
                 <Form.Group className="form-group mb-0">
                   <Form.Label className="FormLabel ">Carers Name</Form.Label>
@@ -253,7 +256,7 @@ export default function BowelChart() {
                   type="submit"
                   onClick={handleClick}
                 >
-                  View
+                  View Chart
                 </Button>
               </span>
             </div>

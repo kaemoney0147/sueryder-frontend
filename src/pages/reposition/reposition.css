@@ -23,11 +23,11 @@
   color: rgb(82, 102, 141);
 }
 .select {
-  height: 60px;
+  height: 70px;
 }
 .rep-image {
   width: 400px;
-  height: 400px;
+  height: 550px;
   border-radius: 10px;
 }
 .respBtn {

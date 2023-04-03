@@ -54,8 +54,9 @@
 
 #submitAdmissionBtn {
   cursor: pointer;
+  text-align: center;
   margin: 2px;
-  width: 100px;
+  width: 150px;
   margin-top: 10px;
   border-color: gray;
   display: inline-block;
@@ -105,12 +106,24 @@
   justify-content: space-around;
 }
 .previousBtn {
-  font-size: 1rem;
+  font-size: 24px;
   cursor: pointer;
+  text-transform: uppercase;
 }
 .foodSelect {
-  height: 40px;
-  border-radius: 5px;
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  /* border: 1px solid #ced4da; */
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 .tabelBtn {
   display: flex;
@@ -222,6 +235,13 @@ table.blueTable tfoot .links a {
 .tableBtn {
   cursor: pointer;
 }
+.foodSelect {
+}
+.foodchartBtn {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5px;
+}
 @media (min-width: 820px) and (max-width: 1024px) {
   .inputField {
     width: 300px;
@@ -300,10 +320,6 @@ table.blueTable tfoot .links a {
   }
   .inputField {
     width: 100px;
-  }
-  .foodchartBtn {
-    display: flex;
-    margin-right: 10px;
   }
 }
 

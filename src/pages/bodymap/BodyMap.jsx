@@ -148,7 +148,7 @@ export default function BodyMap() {
                 <Form.Group controlId="formGridState">
                   <Form.Label className="FormLabel ">Front </Form.Label>
                   <select
-                    className="inputField"
+                    className="inputField foodSelect "
                     value={front}
                     onChange={(e) => setFront(e.target.value)}
                   >
@@ -160,7 +160,7 @@ export default function BodyMap() {
                 <Form.Group controlId="formGridState">
                   <Form.Label className="FormLabel">Back </Form.Label>
                   <select
-                    className="inputField"
+                    className="inputField foodSelect "
                     value={back}
                     onChange={(e) => setBack(e.target.value)}
                   >
@@ -226,7 +226,7 @@ export default function BodyMap() {
               </Button>
               <span className="ViewBtn">
                 <Button id="submitAdmissionBtn" onClick={handleClick}>
-                  View
+                  View Chart
                 </Button>
               </span>
             </div>

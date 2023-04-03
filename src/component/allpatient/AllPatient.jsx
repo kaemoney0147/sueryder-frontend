@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  Alert,
   Badge,
   Card,
   Col,
@@ -16,7 +17,12 @@ import "./allpatient.css";
 import { fetchWithQuery } from "../../redux/actions/index.js";
 import { BsFilter, BsSearch } from "react-icons/bs";
 import { LIST_OF_QUERY } from "../../redux/actions/index.js";
-
+import { MdOutlineFiberNew, MdOutlineBedroomChild } from "react-icons/md";
+import { IoMdContacts } from "react-icons/io";
+import { GiAges } from "react-icons/gi";
+import { FaRestroom } from "react-icons/fa";
+import { BsHouseDoor } from "react-icons/bs";
+import { GrAlert } from "react-icons/gr";
 export default function AllPatient() {
   const querylist = useSelector((state) => state.query.query);
   const dispatch = useDispatch();
@@ -25,6 +31,7 @@ export default function AllPatient() {
   const [benington, setBenington] = useState([]);
   const allPatient = useSelector((state) => state.patient.data);
   const [newPatientDays, setNewPatientDays] = useState(7);
+  const [displayBadge, setDisplayBadge] = useState(false);
 
   function getDaysDiff(date1, date2) {
     const oneDay = 12 * 60 * 60 * 1000; // hours * minutes * seconds * milliseconds
@@ -80,7 +87,40 @@ export default function AllPatient() {
   useEffect(() => {
     filterByBenington();
   }, [benington]);
+  useEffect(() => {
+    const now = new Date();
+    const oneAM = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate(),
+      1,
+      0,
+      0
+    );
 
+    if (now > oneAM && now < oneAM.setHours(2)) {
+      setDisplayBadge(true);
+    } else {
+      setDisplayBadge(false);
+    }
+  }, []);
+  // const handleClick = () => {
+  //   setDisplayBadge(false);
+  // };
+  // const [patientStates, setPatientStates] = useState([]);
+
+  // useEffect(() => {
+  //   // initialize state for all patient cards to false
+  //   const initialState = querylist.map(() => false);
+  //   setPatientStates(initialState);
+  // }, [querylist]);
+
+  // const toggleBadge = (index) => {
+  //   // toggle the state for the patient card at the specified index
+  //   const newStates = [...patientStates];
+  //   newStates[index] = !newStates[index];
+  //   setPatientStates(newStates);
+  // };
   if (querylist !== 0) {
     return (
       <Container className="allPatientContainer mt-3">
@@ -133,26 +173,43 @@ export default function AllPatient() {
                 <Card id="patientlistCard">
                   {getDaysDiff(new Date(p.createdAt), new Date()) <=
                     newPatientDays && (
-                    <Badge variant="danger" className="new-patient-badge">
-                      New Admission
+                    <Badge variant="danger" id="new-patient-badge">
+                      <MdOutlineFiberNew className="newAdmissionIcon" />
                     </Badge>
                   )}
+                  {/* {displayBadge && <GrAlert className="alertIcon" />} */}
+
                   <Card.Img src={p.image} className="patient-image" />
                   <Card.Body className="listofpaitent-card">
-                    <Card.Title>
+                    <Card.Title className="patientTitle mb-0">
+                      <span className="profileInfoIcon">
+                        <IoMdContacts />
+                      </span>
                       {p.title} {p.firstName} {p.lastName}
                     </Card.Title>
                     <Card.Text className="patientInfo mb-0">
+                      <span className="profileInfoIcon">
+                        <FaRestroom />
+                      </span>
                       Gender: {p.Gender}
                     </Card.Text>
                     <Card.Text className=" patientInfo mb-0">
-                      Age: {p.Age}
+                      <span className="profileInfoIcon">
+                        <GiAges />
+                      </span>
+                      Age: {p.age}
                     </Card.Text>
                     <Card.Text className="patientInfo mb-0">
-                      Ward:{p.ward}
+                      <span className="profileInfoIcon">
+                        <BsHouseDoor />
+                      </span>
+                      Ward: {p.ward}
                     </Card.Text>
 
                     <Card.Text className="patientInfo">
+                      <span className="profileInfoIcon">
+                        <MdOutlineBedroomChild />
+                      </span>
                       Room: {p.room}
                     </Card.Text>
                     <Link to={`/patient/${p._id}`}>
@@ -179,19 +236,35 @@ export default function AllPatient() {
               <Card className="patientlistCard">
                 <Card.Img src={p.image} className="patient-image" />
                 <Card.Body className="listofpaitent-card">
-                  <Card.Title>
+                  <Card.Title className="patientTitle mb-0">
+                    <span className="profileInfoIcon">
+                      <IoMdContacts />
+                    </span>
                     {p.title} {p.firstName} {p.lastName}
                   </Card.Title>
                   <Card.Text className="patientInfo mb-0">
+                    <span className="profileInfoIcon">
+                      <FaRestroom />
+                    </span>
                     Gender: {p.Gender}
                   </Card.Text>
                   <Card.Text className=" patientInfo mb-0">
-                    Age: {p.Age}
+                    <span className="profileInfoIcon">
+                      <GiAges />
+                    </span>
+                    Age: {p.age}
                   </Card.Text>
                   <Card.Text className="patientInfo mb-0">
-                    Ward:{p.ward}
+                    <span className="profileInfoIcon">
+                      <BsHouseDoor />
+                    </span>
+                    Ward: {p.ward}
                   </Card.Text>
-                  <Card.Text className="patientInfo mb-0">
+
+                  <Card.Text className="patientInfo">
+                    <span className="profileInfoIcon">
+                      <MdOutlineBedroomChild />
+                    </span>
                     Room: {p.room}
                   </Card.Text>
                   <Link to={`/patient/${p._id}`}>

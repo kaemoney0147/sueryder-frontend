@@ -118,7 +118,7 @@ export default function VitalExamination() {
       <div className="foodWrapper mt-3 mb-3">
         <Card className="FoodchatCard">
           <Card.Header className="text-center">
-            <h3 className="foodTitle"> Recording Patient Vital Examination</h3>
+            <h3 className="foodTitle"> Vital Examination</h3>
           </Card.Header>
           <Card.Body>
             <div>
@@ -242,14 +242,14 @@ export default function VitalExamination() {
               </div>
               <div className="foodFormWrapper">
                 <Form.Group controlId="formGridState">
-                  <Form.Label className="FormLabel">ACVPU </Form.Label>
+                  <Form.Label className="FormLabel">Acvpu </Form.Label>
                   <select
-                    className="inputField"
+                    className="inputField foodSelect "
                     value={consciousness}
                     onChange={(e) => setConsciousness(e.target.value)}
                     required
                   >
-                    <option>Default</option>
+                    <option>Please Select</option>
                     <option>Alert</option>
                     <option>Confusion</option>
                   </select>
@@ -257,12 +257,12 @@ export default function VitalExamination() {
                 <Form.Group controlId="formGridState">
                   <Form.Label className="FormLabel">Inspired O2</Form.Label>
                   <select
-                    className="inputField"
+                    className="inputField foodSelect "
                     value={breathing}
                     onChange={(e) => setBreathing(e.target.value)}
                     required
                   >
-                    <option>Default</option>
+                    <option>Please Select</option>
                     <option>Air</option>
                     <option>Oxygen</option>
                   </select>
@@ -292,17 +292,19 @@ export default function VitalExamination() {
                   />
                 </Form.Group>
               </div>
-              <Form.Group className="form-group mb-0">
-                <Form.Label className="FormLabel">Carers Name</Form.Label>
-                <Form.Control
-                  className="inputField"
-                  type="text"
-                  placeholder="Carers Name"
-                  value={signature}
-                  onChange={(e) => setSignature(e.target.value)}
-                  required
-                />
-              </Form.Group>
+              <div className="foodFormWrapper">
+                <Form.Group className="form-group mb-0">
+                  <Form.Label className="FormLabel">Carers Name</Form.Label>
+                  <Form.Control
+                    className="inputField"
+                    type="text"
+                    placeholder="Carers Name"
+                    value={signature}
+                    onChange={(e) => setSignature(e.target.value)}
+                    required
+                  />
+                </Form.Group>
+              </div>
             </Form>
             <div className="foodchartBtn mb-3">
               <Button
@@ -318,7 +320,7 @@ export default function VitalExamination() {
                   type="submit"
                   onClick={handleClick}
                 >
-                  View
+                  View Chart
                 </Button>
               </span>
             </div>

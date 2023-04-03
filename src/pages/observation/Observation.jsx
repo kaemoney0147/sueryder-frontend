@@ -190,7 +190,7 @@ export default function Observation() {
                   type="submit"
                   //   onClick={handleClick}
                 >
-                  View
+                  View Chart
                 </Button>
               </span>
             </div>
