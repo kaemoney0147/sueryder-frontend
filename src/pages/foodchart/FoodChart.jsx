@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import "react-toastify/dist/ReactToastify.css";
 import "../foodchart/foodchart.css";
 // import { MdArrowForward } from "react-icons/md";
 // import { BiArrowBack } from "react-icons/bi";
+import { ToastContainer, toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 export default function FoodChart() {
   const [timeofday, setTimeofday] = useState("");
@@ -21,7 +24,18 @@ export default function FoodChart() {
   const navigate = useNavigate();
   const [sliceIndex, setSliceIndex] = useState(0);
   const sliceSize = 5;
+  const user = useSelector((state) => state.list.userInfo);
+  console.log(user);
 
+  const foodInput = {
+    timeofday: timeofday,
+    date: date,
+    time: time,
+    offered: offered,
+    amountoffered: amountoffered,
+    amountaccepted: amountaccepted,
+    givenby: user.username,
+  };
   const nextSlice = () => {
     const nextIndex = sliceIndex + sliceSize;
     if (nextIndex >= food.length) {
@@ -78,15 +92,7 @@ export default function FoodChart() {
     try {
       let options = {
         method: "POST",
-        body: JSON.stringify({
-          timeofday,
-          date,
-          time,
-          offered,
-          amountoffered,
-          amountaccepted,
-          givenby,
-        }),
+        body: JSON.stringify(foodInput),
         headers: {
           "Content-Type": "application/json",
         },
@@ -96,7 +102,7 @@ export default function FoodChart() {
         options
       );
       if (url.ok) {
-        alert("You have successfully save a food for the patient");
+        toast("You have successfully save a food for the patient");
         setAmountoffered("");
         setAmountaccepted("");
         setDate("");
@@ -256,11 +262,12 @@ export default function FoodChart() {
                   className="inputField"
                   type="text"
                   placeholder="Carers Name"
-                  value={givenby}
-                  onChange={(e) => setGivenby(e.target.value)}
+                  value={user.username}
+                  // onChange={(e) => setGivenby(e.target.value)}
                   required
                 />
               </Form.Group>
+              <ToastContainer />
             </Form>
             <div className="foodchartBtn mb-4">
               <Button

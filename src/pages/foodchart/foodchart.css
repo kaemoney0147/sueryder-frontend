@@ -110,6 +110,10 @@
   cursor: pointer;
   text-transform: uppercase;
 }
+.toast {
+  position: "top";
+  color: green;
+}
 .foodSelect {
   display: block;
   width: 100%;

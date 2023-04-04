@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Card, Container, Form, Table } from "react-bootstrap";
+import { Button, Card, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import "react-toastify/dist/ReactToastify.css";
 import "../fluidchart/flidchart.css";
+import { ToastContainer, toast } from "react-toastify";
+
+import { useSelector } from "react-redux";
 
 export default function FluidChart() {
   const [timeofday, setTimeofday] = useState("");
@@ -20,7 +24,7 @@ export default function FluidChart() {
   const [route, setRoute] = useState("");
   const [sliceIndex, setSliceIndex] = useState(0);
   const sliceSize = 5;
-
+  const user = useSelector((state) => state.list.userInfo);
   const nextSlice = () => {
     const nextIndex = sliceIndex + sliceSize;
     if (nextIndex >= fluid.length) {
@@ -57,7 +61,7 @@ export default function FluidChart() {
     output: output,
     amountofferd: amountofferd,
     amounttaken: amounttaken,
-    givenby: givenby,
+    givenby: user.username,
   };
   const navigate = useNavigate();
   const handleClick = () => {
@@ -113,7 +117,7 @@ export default function FluidChart() {
         options
       );
       if (url.ok) {
-        alert("You have successfully save a fluid for this patient");
+        toast("You have successfully save a fluid for this patient");
         setAmountofferd("");
         setAmounttaken("");
         setDate("");
@@ -307,12 +311,12 @@ export default function FluidChart() {
                     className="inputField"
                     type="text"
                     placeholder="Carers Name"
-                    value={givenby}
-                    onChange={(e) => setGivenby(e.target.value)}
+                    value={user.username}
                     required
                   />
                 </Form.Group>
               </div>
+              <ToastContainer />
             </Form>
             <div className="foodchartBtn mb-3">
               <Button

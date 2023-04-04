@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Container, Form, Table } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import "react-toastify/dist/ReactToastify.css";
 import "../bowelchart/bowelchart.css";
+import { ToastContainer, toast } from "react-toastify";
+
+import { useSelector } from "react-redux";
 
 export default function BowelChart() {
   const [date, setDate] = useState("");
@@ -18,7 +22,15 @@ export default function BowelChart() {
   const navigate = useNavigate();
   const [sliceIndex, setSliceIndex] = useState(0);
   const sliceSize = 5;
-
+  const user = useSelector((state) => state.list.userInfo);
+  const bowelInput = {
+    date: date,
+    time: time,
+    type: type,
+    amount: amount,
+    intervention: intervention,
+    signature: user.username,
+  };
   const nextSlice = () => {
     const nextIndex = sliceIndex + sliceSize;
     if (nextIndex >= food.length) {
@@ -72,14 +84,7 @@ export default function BowelChart() {
     try {
       let options = {
         method: "POST",
-        body: JSON.stringify({
-          date,
-          time,
-          type,
-          amount,
-          intervention,
-          signature,
-        }),
+        body: JSON.stringify(bowelInput),
         headers: {
           "Content-Type": "application/json",
         },
@@ -89,7 +94,7 @@ export default function BowelChart() {
         options
       );
       if (url.ok) {
-        alert("You have successfully save a bowel for the patient");
+        toast("You have successfully save a bowel for the patient");
         setAmount("");
         setDate("");
         setIntervention("");
@@ -235,12 +240,12 @@ export default function BowelChart() {
                     className="inputField"
                     type="text"
                     placeholder="Carers Name"
-                    value={signature}
-                    onChange={(e) => setSignature(e.target.value)}
+                    value={user.username}
                     required
                   />
                 </Form.Group>
               </div>
+              <ToastContainer />
             </Form>
             <div className="foodchartBtn mb-3">
               <Button
