@@ -76,7 +76,11 @@ export default function NavBar() {
       </Container>
       <div className="topbarImageContainer mb">
         <img src={profile.avatar} alt="" className="topBarImage" />
-        <NavDropdown title={profile.username} id="dropwonLIST">
+        <NavDropdown
+          title={`${profile.firstName} ${profile.lastName}`}
+          id="dropwonLIST"
+        >
+          <NavDropdown.Item onClick={logOut}>Profile</NavDropdown.Item>
           <NavDropdown.Item onClick={logOut}>Logout</NavDropdown.Item>
         </NavDropdown>
       </div>
