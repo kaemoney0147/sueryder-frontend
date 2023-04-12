@@ -10,6 +10,7 @@ export default function BodyMap() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [front, setFront] = useState("");
+  const [patient, setPatient] = useState([]);
   const [back, setBack] = useState("");
   const [review, setReview] = useState("");
   const [signatures, setSignatures] = useState("");
@@ -84,9 +85,23 @@ export default function BodyMap() {
       console.log(error);
     }
   };
+  const fetchUserbyId = async () => {
+    try {
+      const url = await fetch(
+        `${process.env.REACT_APP_BE_URL}/patient/${userId}`
+      );
+      if (url.ok) {
+        const response = await url.json();
 
+        setPatient(response);
+      } else {
+        console.log("error fetching user");
+      }
+    } catch (error) {}
+  };
   useEffect(() => {
     postBodyMap();
+    fetchUserbyId();
   }, []);
   return (
     <Container className="foodChart">
@@ -142,7 +157,9 @@ export default function BodyMap() {
         <div className="foodChartForm">
           <div className="left">
             <div className="patiendetails">
-              <p className="mb-0">Name: SANDRA AKINLOTAN</p>
+              <p className="mb-0">
+                Name:{`${patient.firstName} ${patient.lastName}`}
+              </p>
               <p>Dob: 1989-01-03</p>
             </div>
             <img
