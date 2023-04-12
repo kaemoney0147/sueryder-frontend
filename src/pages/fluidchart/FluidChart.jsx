@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "react-toastify/dist/ReactToastify.css";
 import "../fluidchart/flidchart.css";
@@ -61,7 +61,7 @@ export default function FluidChart() {
     output: output,
     amountofferd: amountofferd,
     amounttaken: amounttaken,
-    givenby: user.username,
+    givenby: `${user.firstName} ${user.lastName}`,
   };
   const navigate = useNavigate();
   const handleClick = () => {
@@ -164,16 +164,22 @@ export default function FluidChart() {
           </Card.Body>
         </Card>
         <div id="personalBtn">
-          <span className="previousBtn">
-            <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-            Previous
-          </span>
-          <span className="previousBtn">
-            <AiOutlineArrowRight
-              onClick={() => navigate(`/bowelchart/${id}`)}
-            />
-            Next
-          </span>
+          <Link onClick={() => navigate(-1)} className="Link">
+            <span className="previousBtn">
+              <AiOutlineArrowLeft />
+              Previous
+            </span>
+          </Link>
+          <Link
+            to={`/bowelchart/${id}`}
+            onClick={() => navigate(`/bowelchart/${id}`)}
+            className="Link"
+          >
+            <span className="previousBtn">
+              <AiOutlineArrowRight />
+              Next
+            </span>
+          </Link>
         </div>
         <div className="fluidChartForm ">
           <div className="fluidLeft">
@@ -263,6 +269,7 @@ export default function FluidChart() {
                   <Form.Label className="FormLabel ">Amount</Form.Label>
                   <Form.Control
                     className="inputField"
+                    type="number"
                     placeholder="Amount offered"
                     value={amountofferd}
                     onChange={(e) => setAmountofferd(e.target.value)}
@@ -275,7 +282,7 @@ export default function FluidChart() {
                   <Form.Label className="FormLabel">Accept</Form.Label>
                   <Form.Control
                     className="inputField"
-                    type="text"
+                    type="number"
                     placeholder="Amount accepted"
                     value={amounttaken}
                     onChange={(e) => setAmounttaken(e.target.value)}
@@ -286,7 +293,7 @@ export default function FluidChart() {
                   <Form.Label className="FormLabel">Total</Form.Label>
                   <Form.Control
                     className="inputField"
-                    type="text"
+                    type="number"
                     placeholder="Total Running"
                     value={running}
                     onChange={(e) => setRunning(e.target.value)}
@@ -299,7 +306,7 @@ export default function FluidChart() {
                   <Form.Label className="FormLabel ">Output</Form.Label>
                   <Form.Control
                     className="inputField"
-                    type="text"
+                    type="number"
                     placeholder="Output in ml"
                     value={output}
                     onChange={(e) => setOutput(e.target.value)}
@@ -311,7 +318,7 @@ export default function FluidChart() {
                     className="inputField"
                     type="text"
                     placeholder="Carers Name"
-                    value={user.username}
+                    value={`${user.firstName} ${user.lastName}`}
                     required
                   />
                 </Form.Group>

@@ -109,6 +109,11 @@
   font-size: 24px;
   cursor: pointer;
   text-transform: uppercase;
+  text-decoration: none;
+  color: gray;
+}
+.Link:hover {
+  text-decoration: none;
 }
 .toast {
   position: "top";

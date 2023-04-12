@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import "../personalcare/personalcare.css";
 import { Button, Container, Form } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 export default function PersonalCare() {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ export default function PersonalCare() {
   const [patient, setPatient] = useState([]);
   const [sliceIndex, setSliceIndex] = useState(0);
   const sliceSize = 5;
+  const user = useSelector((state) => state.list.userInfo);
 
   const nextSlice = () => {
     const nextIndex = sliceIndex + sliceSize;
@@ -46,7 +48,7 @@ export default function PersonalCare() {
   };
 
   const inputDate = {
-    caregive,
+    caregive: `${user.firstName} ${user.lastName}`,
     date,
     time,
     givenby,
@@ -130,25 +132,31 @@ export default function PersonalCare() {
         <div className="personcare-maincontainer mb-3 mt-4">
           <div className="personalcare-textarea">
             <div className="personcareInfo">
-              <h1>Clinical Daily Journal</h1>
+              <h1>Daily Clinical Journal</h1>
               <p>
                 Name: {patient.title} {patient.firstName} {patient.lastName}
               </p>
-              <p>Date of Birth: {patient.dob}</p>
+              {/* <p>Date of Birth: {patient.dob}</p> */}
               <p>Ward: {patient.ward}</p>
             </div>
 
             <div id="personalBtn">
-              <span className="previousBtn">
-                <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-                Previous
-              </span>
-              <span className="previousBtn">
-                <AiOutlineArrowRight
-                  onClick={() => navigate(`/observation/${userId}`)}
-                />
-                Next
-              </span>
+              <Link onClick={() => navigate(-1)} className="Link">
+                <span className="previousBtn">
+                  <AiOutlineArrowLeft />
+                  Previous
+                </span>
+              </Link>
+              <Link
+                to={`/observation/${userId}`}
+                onClick={() => navigate(`/observation/${userId}`)}
+                className="Link"
+              >
+                <span className="previousBtn">
+                  <AiOutlineArrowRight />
+                  Next
+                </span>
+              </Link>
             </div>
             <Form onSubmit={handleSubmit} id="personalCareForm">
               {/* <div className="personcareFormWrapper"> */}
@@ -245,7 +253,7 @@ export default function PersonalCare() {
                   type="text"
                   placeholder="Name of carers"
                   required
-                  value={givenby}
+                  value={`${user.firstName} ${user.lastName}`}
                   onChange={(e) => setGivenby(e.target.value)}
                 />
               </Form.Group>

@@ -80,7 +80,7 @@ export default function NavBar() {
           title={`${profile.firstName} ${profile.lastName}`}
           id="dropwonLIST"
         >
-          <NavDropdown.Item onClick={logOut}>Profile</NavDropdown.Item>
+          <NavDropdown.Item>Profile</NavDropdown.Item>
           <NavDropdown.Item onClick={logOut}>Logout</NavDropdown.Item>
         </NavDropdown>
       </div>

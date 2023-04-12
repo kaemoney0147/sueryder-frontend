@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Form, Table } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "../reposition/reposition.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+import { useSelector } from "react-redux";
 
 export default function Reposition() {
   const [position, setPosition] = useState("");
@@ -15,7 +16,7 @@ export default function Reposition() {
   const navigate = useNavigate();
   const [sliceIndex, setSliceIndex] = useState(0);
   const sliceSize = 5;
-
+  const user = useSelector((state) => state.list.userInfo);
   const nextSlice = () => {
     const nextIndex = sliceIndex + sliceSize;
     if (nextIndex >= resp.length) {
@@ -39,7 +40,7 @@ export default function Reposition() {
     time: time,
     date: date,
     comment: comment,
-    signatures: signatures,
+    signatures: `${user.firstName} ${user.lastName}`,
   };
 
   const param = useParams();
@@ -105,33 +106,42 @@ export default function Reposition() {
           <div>
             <ul>
               <li>
-                Complete this food chart each time you offer food to a patient
+                This review focuses on identifying the most appropriate position
+                for people who are at risk of developing a pressure ulcer, in
+                order to reduce or relieve the pressure and prevent the
+                development of a pressure ulcer.
               </li>
               <li>
-                Please do not leave it until the end of the day or you may
-                forget what they have given.
+                The review also aims to identify the optimum frequency at which
+                people should be repositioned.
               </li>
               <li>
-                specify the quantity of food eaten by filling the approriate
-                amount
+                The aims of repositioning are to reduce or relieve the pressure
+                on the area at risk, maintain muscle mass and general tissue
+                integrity and ensure adequate blood supply to the at risk area
               </li>
-              <li>Even if no food is taken, whereable please hight reason.</li>
             </ul>
           </div>
         </Card.Body>
       </Card>
 
       <div id="personalBtn">
-        <span className="previousBtn">
-          <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-          Previous
-        </span>
-        <span className="previousBtn">
-          <AiOutlineArrowRight
-            onClick={() => navigate(`/personalcare/${id}`)}
-          />
-          Next
-        </span>
+        <Link onClick={() => navigate(-1)} className="Link">
+          <span className="previousBtn">
+            <AiOutlineArrowLeft />
+            Previous
+          </span>
+        </Link>
+        <Link
+          to={`/personalcare/${id}`}
+          onClick={() => navigate(`/personalcare/${id}`)}
+          className="Link"
+        >
+          <span className="previousBtn">
+            <AiOutlineArrowRight />
+            Next
+          </span>
+        </Link>
       </div>
       <div className="resposition-field mt-2">
         <div className="imgContainer">
@@ -196,7 +206,7 @@ export default function Reposition() {
               <Form.Control
                 className="inputField"
                 type="text"
-                value={signatures}
+                value={`${user.firstName} ${user.lastName}`}
                 onChange={(e) => setSignatures(e.target.value)}
               />
             </Form.Group>

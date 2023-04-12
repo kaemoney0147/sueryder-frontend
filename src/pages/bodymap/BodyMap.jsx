@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Form, Table } from "react-bootstrap";
 import "../bodymap/bodymap.css";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function BodyMap() {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ export default function BodyMap() {
   const [showContent, setShowContent] = useState(false);
   const param = useParams();
   const userId = param.id;
+  const user = useSelector((state) => state.list.userInfo);
   const [sliceIndex, setSliceIndex] = useState(0);
   const sliceSize = 5;
 
@@ -39,7 +41,7 @@ export default function BodyMap() {
     time: time,
     date: date,
     review: review,
-    signatures: signatures,
+    signatures: `${user.firstName} ${user.lastName}`,
     front: front,
     back: back,
   };
@@ -120,14 +122,22 @@ export default function BodyMap() {
           </Card.Body>
         </Card>
         <div id="personalBtn">
-          <span className="previousBtn">
-            <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-            Previous
-          </span>
-          <span className="previousBtn">
-            <AiOutlineArrowRight onClick={() => navigate(`/vital/${userId}`)} />
-            Next
-          </span>
+          <Link onClick={() => navigate(-1)} className="Link">
+            <span className="previousBtn">
+              <AiOutlineArrowLeft />
+              Previous
+            </span>
+          </Link>
+          <Link
+            to={`/vital/${userId}`}
+            onClick={() => navigate(`/vital/${userId}`)}
+            className="Link"
+          >
+            <span className="previousBtn">
+              <AiOutlineArrowRight />
+              Next
+            </span>
+          </Link>
         </div>
         <div className="foodChartForm">
           <div className="left">
@@ -213,7 +223,7 @@ export default function BodyMap() {
                     className="inputField"
                     type="text"
                     placeholder="Name of person making entry"
-                    value={signatures}
+                    value={`${user.firstName} ${user.lastName}`}
                     onChange={(e) => setSignatures(e.target.value)}
                     required
                   />

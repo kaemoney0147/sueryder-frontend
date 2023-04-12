@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Form, Table } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "../vitalexamination/vitalexamination.css";
+import { useSelector } from "react-redux";
 
 export default function VitalExamination() {
   const [date, setDate] = useState("");
@@ -23,6 +24,7 @@ export default function VitalExamination() {
   const navigate = useNavigate();
   const [sliceIndex, setSliceIndex] = useState(0);
   const sliceSize = 5;
+  const user = useSelector((state) => state.list.userInfo);
 
   const nextSlice = () => {
     const nextIndex = sliceIndex + sliceSize;
@@ -45,7 +47,7 @@ export default function VitalExamination() {
     respiration: respiration,
     pulse: pulse,
     bloodpressure: bloodpressure,
-    signature: signature,
+    signature: `${user.firstName} ${user.lastName}`,
     temparature: temparature,
     breathing: breathing,
     scale1: scale1,
@@ -124,34 +126,39 @@ export default function VitalExamination() {
             <div>
               <ul>
                 <li>
-                  Complete this food chart each time you offer food to a patient
+                  Complete this vital chart each time a patient is examined
                 </li>
                 <li>
-                  Please do not leave it until the end of the day or you may
-                  forget what they have given.
+                  Vital signs monitoring is crucial for living a long and
+                  healthy life
                 </li>
+                <li>Vitals gives us a glimpse into our overall well-being.</li>
                 <li>
-                  specify the quantity of food eaten by filling the approriate
-                  amount
-                </li>
-                <li>
-                  Even if no food is taken, whereable please hight reason.
+                  They signal early signs of an infection, prevent a
+                  misdiagnosis, detect symptom-less medical problems, and
+                  encourage us to make better choices.
                 </li>
               </ul>
             </div>
           </Card.Body>
         </Card>
         <div id="personalBtn">
-          <span className="previousBtn">
-            <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-            Previous
-          </span>
-          <span className="previousBtn">
-            <AiOutlineArrowRight
-              onClick={() => navigate(`/reposition/${id}`)}
-            />
-            Next
-          </span>
+          <Link onClick={() => navigate(-1)} className="Link">
+            <span className="previousBtn">
+              <AiOutlineArrowLeft />
+              Previous
+            </span>
+          </Link>
+          <Link
+            to={`/reposition/${id}`}
+            onClick={() => navigate(`/reposition/${id}`)}
+            className="Link"
+          >
+            <span className="previousBtn">
+              <AiOutlineArrowRight />
+              Next
+            </span>
+          </Link>
         </div>
         <div className="foodChartForm">
           <div className="left">
@@ -299,7 +306,7 @@ export default function VitalExamination() {
                     className="inputField"
                     type="text"
                     placeholder="Carers Name"
-                    value={signature}
+                    value={`${user.firstName} ${user.lastName}`}
                     onChange={(e) => setSignature(e.target.value)}
                     required
                   />

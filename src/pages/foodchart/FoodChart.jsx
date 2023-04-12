@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, Container, Form } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "react-toastify/dist/ReactToastify.css";
 import "../foodchart/foodchart.css";
@@ -34,7 +34,7 @@ export default function FoodChart() {
     offered: offered,
     amountoffered: amountoffered,
     amountaccepted: amountaccepted,
-    givenby: user.username,
+    givenby: `${user.firstName} ${user.lastName}`,
   };
   const nextSlice = () => {
     const nextIndex = sliceIndex + sliceSize;
@@ -146,16 +146,22 @@ export default function FoodChart() {
           </Card.Body>
         </Card>
         <div id="personalBtn">
-          <span className="previousBtn">
-            <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-            Previous
-          </span>
-          <span className="previousBtn">
-            <AiOutlineArrowRight
-              onClick={() => navigate(`/fluidchart/${id}`)}
-            />
-            Next
-          </span>
+          <Link onClick={() => navigate(-1)} className="Link">
+            <span className="previousBtn">
+              <AiOutlineArrowLeft />
+              Previous
+            </span>
+          </Link>
+          <Link
+            to={`/fluidchart/${id}`}
+            onClick={() => navigate(`/fluidchart/${id}`)}
+            className="Link"
+          >
+            <span className="previousBtn">
+              <AiOutlineArrowRight />
+              Next
+            </span>
+          </Link>
         </div>
         <div className="foodChartForm mb-4">
           <div className="left">
@@ -262,7 +268,7 @@ export default function FoodChart() {
                   className="inputField"
                   type="text"
                   placeholder="Carers Name"
-                  value={user.username}
+                  value={`${user.firstName} ${user.lastName}`}
                   // onChange={(e) => setGivenby(e.target.value)}
                   required
                 />

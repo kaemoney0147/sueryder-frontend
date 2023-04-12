@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, Container, Form, Table } from "react-bootstrap";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import "react-toastify/dist/ReactToastify.css";
 import "../bowelchart/bowelchart.css";
@@ -29,7 +29,7 @@ export default function BowelChart() {
     type: type,
     amount: amount,
     intervention: intervention,
-    signature: user.username,
+    signature: `${user.firstName} ${user.lastName}`,
   };
   const nextSlice = () => {
     const nextIndex = sliceIndex + sliceSize;
@@ -119,32 +119,41 @@ export default function BowelChart() {
             <div>
               <ul>
                 <li>
-                  Complete this food chart each time you offer food to a patient
+                  Complete this Bowel chart each time patient open bowel,patient
+                  cant be constipated but due to their illness unable to express
+                  their self.
                 </li>
                 <li>
-                  Please do not leave it until the end of the day or you may
-                  forget what they have given.
+                  Patient bowel health can quickly change due to bad food or
+                  sickness,Recording bowel help's the nurse's and doctor's know
+                  how best to help the patient
                 </li>
                 <li>
-                  specify the quantity of food eaten by filling the approriate
-                  amount
+                  selecting approriate bowel quantity and type is also very
+                  important! amount
                 </li>
-                <li>
-                  Even if no food is taken, whereable please hight reason.
-                </li>
+                <li>Even if no bowel is opened, please kindly record this.</li>
               </ul>
             </div>
           </Card.Body>
         </Card>
         <div id="personalBtn">
-          <span className="previousBtn">
-            <AiOutlineArrowLeft onClick={() => navigate(-1)} />
-            Previous
-          </span>
-          <span className="previousBtn">
-            <AiOutlineArrowRight onClick={() => navigate(`/bodymap/${id}`)} />
-            Next
-          </span>
+          <Link onClick={() => navigate(-1)} className="Link">
+            <span className="previousBtn">
+              <AiOutlineArrowLeft />
+              Previous
+            </span>
+          </Link>
+          <Link
+            to={`/bodymap/${id}`}
+            onClick={() => navigate(`/bodymap/${id}`)}
+            className="Link"
+          >
+            <span className="previousBtn">
+              <AiOutlineArrowRight />
+              Next
+            </span>
+          </Link>
         </div>
         <div className="bowelChartForm">
           <div className="bowelLeft">
@@ -240,7 +249,7 @@ export default function BowelChart() {
                     className="inputField"
                     type="text"
                     placeholder="Carers Name"
-                    value={user.username}
+                    value={`${user.firstName} ${user.lastName}`}
                     required
                   />
                 </Form.Group>
