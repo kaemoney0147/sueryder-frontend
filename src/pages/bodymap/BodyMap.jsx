@@ -158,7 +158,8 @@ export default function BodyMap() {
           <div className="left">
             <div className="patiendetails">
               <p className="mb-0">
-                Name:{`${patient.firstName} ${patient.lastName}`}
+                Name:
+                {`${patient.title} ${patient.firstName} ${patient.lastName}`}
               </p>
               <p>Dob: 1989-01-03</p>
             </div>
